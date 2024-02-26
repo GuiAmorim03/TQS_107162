@@ -5,37 +5,44 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
+import java.util.Optional;
+import tqs.ua.pt.connection.TqsBasicHttpClient;
+
 import java.io.IOException;
 import java.net.URISyntaxException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import tqs.ua.pt.geocoding.Address;
+import tqs.ua.pt.geocoding.AddressResolverService;
 
 public class AddressResolverIT {
 
+    private AddressResolverService addressResolver;
 
     @BeforeEach
-    public void init(){
+    public void init() {
+        addressResolver = new AddressResolverService(new TqsBasicHttpClient());
     }
 
-
-    @Disabled
     @Test
     public void whenGoodCoordidates_returnAddress() throws IOException, URISyntaxException, ParseException {
 
-        //todo
+        Optional<Address> result = addressResolver.findAddressForLocation(40.63436, -8.65616);
+        Address expected = new Address( "Avenida da Universidade", "Aveiro","3810-489", "");
 
-        // repeat the same tests conditions from AddressResolverTest, without mocks
-
+        assertEquals(result, Optional.of(expected));
     }
 
-    @Disabled
     @Test
     public void whenBadCoordidates_thenReturnNoValidAddrress() throws IOException, URISyntaxException, ParseException {
 
-        //todo
-        // repeat the same tests conditions from AddressResolverTest, without mocks
-        
+        Optional<Address> result = addressResolver.findAddressForLocation(310, -310);
+        Address expected = new Address( "Avenida da Universidade", "Aveiro","3810-489", "");
+        assertNotEquals(result, Optional.of(expected));
+
     }
 
 }
