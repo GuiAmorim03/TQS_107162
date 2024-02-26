@@ -8,3 +8,8 @@ Using @InjectMocks, it creates a simulate object for _**StocksPortfolio**_ and i
 
 ### Using Hamcrest
 [Hamcrest Guide](https://www.baeldung.com/java-junit-hamcrest-guide)
+
+## Lab 2.2
+
+### Which is the SuT (subject under test)? Which is the service to mock?
+The SuT is the _**AdressResolverService**_ and the service to mock is the _**ISimpleHttpClient**_
