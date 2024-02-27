@@ -2,7 +2,6 @@ package tqs.ua.pt.integration;
 
 import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.Optional;
@@ -13,7 +12,6 @@ import java.net.URISyntaxException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import tqs.ua.pt.geocoding.Address;
 import tqs.ua.pt.geocoding.AddressResolverService;
