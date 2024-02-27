@@ -16,14 +16,15 @@ The SuT is the _**AdressResolverService**_ and the service to mock is the _**ISi
 
 ## Lab 2.3
 
-Na realização do exercício 3, foi usado o template fornecido pelo professor que se encontra no diretório _**lab2_2/geocoding**_ e na pasta de testes _**integration**_, tendo sido corrido os comandos:
+On exercise 3, I used the template given by the professor, which is in the directory _**lab2_2/geocoding**_ , in the folder _**integration**_.
+The following commands were runned in the terminal:
 
 ```bash
 mvn test -Dtest=AddressResolverIT
 ```
-que executou os testes em cerca de 7 segundos
+that executed the tests in about 7 seconds
 
 ```bash
 mvn install failsafe:integration-test
 ```
-que executou os testes em cerca de 14 segundos
+that executed the tests in about 14 seconds
