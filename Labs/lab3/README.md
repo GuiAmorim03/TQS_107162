@@ -75,3 +75,27 @@ Also, the implementation D use `MockMvc` to simulate HTTP solicitations, while t
 ## Lab 3.2
 
 ## Lab 3.3
+
+In this exercise, it was used @TestPropertySource, instead of @AutoConfigureTestDatabase, so it was necessary to define the properties for the test database in the file `application-integrationtest.properties`, following the previous example:
+
+```properties
+spring.datasource.url=jdbc:mysql://localhost:33060/tqsdemo
+spring.jpa.hibernate.ddl-auto=create-drop
+spring.datasource.username=demo
+spring.datasource.password=demo
+``` 
+
+To run the mysql instance, it was used the following command:
+
+```bash
+docker run --name mysql5tqs -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=tqsdemo -e MYSQL_USER=demo -e MYSQL_PASSWORD=demo -p 33060:3306 -d mysql/mysql-server:5.7
+```
+
+The tests were executed with success, and the database was created and dropped as expected:
+    
+```bash
+mysql> use tqsdemo
+Database changed
+mysql> show tables;
+Empty set (0.01 sec)
+```
