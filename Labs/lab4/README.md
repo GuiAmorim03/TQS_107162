@@ -20,4 +20,4 @@ In this exercise, the same problem occured, so it was necessary to do the same w
 
 ## Lab 4.3
 
-For this exercise, I recorded a new test, in order to increase the difficulty of the exercise
+For this exercise, I recorded a new test (Alternative), in order to increase the difficulty of the exercise
