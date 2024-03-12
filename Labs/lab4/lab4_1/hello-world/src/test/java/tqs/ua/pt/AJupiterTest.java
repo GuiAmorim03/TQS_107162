@@ -37,13 +37,13 @@ public class AJupiterTest {
     @Test
     void test() {
         // Exercise
-        String sutUrl = "https://www.ua.pt/";
+        String sutUrl = "https://www.youtube.com/";
         driver.get(sutUrl);
         String title = driver.getTitle();
         log.debug("The title of {} is {}", sutUrl, title);
 
         // Verify
-        assertThat(title).isEqualTo("Página Inicial - Universidade de Aveiro");
+        assertThat(title).isEqualTo("YouTube");
     }
 
 
