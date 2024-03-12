@@ -14,3 +14,6 @@ mvn wrapper:wrapper -Dmaven=3.9.6
 ```
 After that, the tests were executed with success, using the command `./mvnw test`
 
+## Lab 4.2
+
+In this exercise, the same problem occured, so it was necessary to do the same wrapper of the maven version 3.9.6
