@@ -5,6 +5,7 @@ Teste e Qualidade de Software - 2023/24
 O repositório está organizado em 2 pastas:
 * Labs/ - Contém os trabalhos individuais realizados nas aulas práticas.
 * Slides/ - Contém os slides que incluem a matéria lecionada nas aulas teóricas.
+* Homeworks/ - Contém os trabalhos de casa.
 
 ## Avaliação
 * Teste TP - 40%
