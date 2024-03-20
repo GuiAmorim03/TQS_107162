@@ -12,7 +12,7 @@ public class Travel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long tripId;
+    private Long travelId;
     private String departure;
     private String arrival;
     private Date date;
@@ -39,12 +39,12 @@ public class Travel {
 
     // getters and setters
 
-    public Long getTripId() {
-        return tripId;
+    public Long getTravelId() {
+        return travelId;
     }
 
-    public void setTripId(Long tripId) {
-        this.tripId = tripId;
+    public void setTravelId(Long travelId) {
+        this.travelId = travelId;
     }
 
     public String getDeparture() {
@@ -90,7 +90,7 @@ public class Travel {
     @Override
     public String toString() {
         return "Travel{" +
-                "tripId=" + tripId +
+                "travelId=" + travelId +
                 ", departure='" + departure + '\'' +
                 ", arrival='" + arrival + '\'' +
                 ", date=" + date +

@@ -1,5 +1,8 @@
 package tqs.ua.pt.backend.controllers;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +21,7 @@ import tqs.ua.pt.backend.services.TravelService;
 @RestController
 @RequestMapping("/api")
 public class TravelController {
-    
+
     @Autowired
     private TravelService travelService;
 
@@ -29,11 +32,16 @@ public class TravelController {
 
     @GetMapping("/travel/{id}")
     public Travel getTravelById(@PathVariable Long travelId) {
-        return travelService.getTravelById(travelId); 
+        return travelService.getTravelById(travelId);
     }
 
     @GetMapping("/travel/{departure}/{arrival}/{date}")
-    public List<Travel> getTravelByRouteAndDate(@PathVariable String departure, @PathVariable String arrival, @PathVariable String date) {
+    public List<Travel> getTravelByRouteAndDate(@PathVariable String departure, @PathVariable String arrival,
+            @PathVariable String dateStr) throws ParseException {
+        Date date = null;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        date = dateFormat.parse(dateStr);
+
         return travelService.getTravelsByDepartureAndArrivalAndDate(departure, arrival, date);
     }
 }

@@ -1,5 +1,6 @@
 package tqs.ua.pt.backend.services;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,7 @@ import tqs.ua.pt.backend.repositories.TravelRepository;
 
 @Service
 public class TravelService {
-    
+
     @Autowired
     private TravelRepository travelRepository;
 
@@ -22,7 +23,7 @@ public class TravelService {
         return travelRepository.findByTravelId(travelId);
     }
 
-    public List<Travel> getTravelsByDepartureAndArrivalAndDate(String departure, String arrival, String date) {
+    public List<Travel> getTravelsByDepartureAndArrivalAndDate(String departure, String arrival, Date date) {
         return travelRepository.findByDepartureAndArrivalAndDate(departure, arrival, date);
     }
 }
