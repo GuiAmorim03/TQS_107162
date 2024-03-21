@@ -4,13 +4,24 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import tqs.ua.pt.backend.models.Travel;
 
 @Repository
-public interface TravelRepository extends JpaRepository<Travel, Long>{
+public interface TravelRepository extends JpaRepository<Travel, Long> {
     public Travel findByTravelId(Long travelId);
-    public List<Travel> findByDepartureAndArrivalAndDate(String departure, String arrival, Date date);
-   
+    public List<Travel> findByDeparture(String departure);
+    public List<Travel> findByArrival(String arrival);
+    public List<Travel> findByDepartureAndArrival(String departure, String arrival);
+
+    @Query("SELECT t FROM Travel t WHERE t.date >= :startDate AND t.date < :endDate")
+    public List<Travel> findByDate(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
+
+    @Query("SELECT t FROM Travel t WHERE t.departure = :departure AND t.arrival = :arrival AND t.date >= :startDate AND t.date < :endDate")
+    public List<Travel> findByDepartureAndArrivalAndDate(@Param("departure") String departure,
+            @Param("arrival") String arrival, @Param("startDate") Date startDate, @Param("endDate") Date endDate);
+
 }

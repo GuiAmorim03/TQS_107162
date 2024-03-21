@@ -2,6 +2,7 @@ package tqs.ua.pt.backend.controllers;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -37,11 +38,16 @@ public class TravelController {
 
     @GetMapping("/travel/{departure}/{arrival}/{date}")
     public List<Travel> getTravelByRouteAndDate(@PathVariable String departure, @PathVariable String arrival,
-            @PathVariable String dateStr) throws ParseException {
-        Date date = null;
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        date = dateFormat.parse(dateStr);
+            @PathVariable String date) throws ParseException {
 
-        return travelService.getTravelsByDepartureAndArrivalAndDate(departure, arrival, date);
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date startDate = formatter.parse(date);
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(startDate);
+        calendar.add(Calendar.DAY_OF_MONTH, 1); // Avançar 1 dia
+        Date endDate = calendar.getTime();
+
+        return travelService.getTravelsByDepartureAndArrivalAndDate(departure, arrival, startDate, endDate);
     }
 }
