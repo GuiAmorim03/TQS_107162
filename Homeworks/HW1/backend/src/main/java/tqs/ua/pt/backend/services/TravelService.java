@@ -23,7 +23,15 @@ public class TravelService {
         return travelRepository.findByTravelId(travelId);
     }
 
+    public List<Travel> getTravelsByDepartureAndArrival(String departure, String arrival) {
+        return travelRepository.findByDepartureAndArrival(departure, arrival);
+    }
+
     public List<Travel> getTravelsByDepartureAndArrivalAndDate(String departure, String arrival, Date dateStart, Date dateEnd) {
         return travelRepository.findByDepartureAndArrivalAndDate(departure, arrival, dateStart, dateEnd);
+    }
+
+    public List<Travel> getAllTravels() {
+        return travelRepository.findAll();
     }
 }
