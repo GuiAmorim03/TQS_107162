@@ -1,4 +1,4 @@
-package tqs.ua.pt.backend;
+package tqs.ua.pt.backend.services;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -7,7 +7,6 @@ import java.util.Date;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -17,7 +16,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import tqs.ua.pt.backend.models.Travel;
 import tqs.ua.pt.backend.repositories.TravelRepository;
-import tqs.ua.pt.backend.services.TravelService;
 
 @SuppressWarnings("deprecation")
 @ExtendWith(MockitoExtension.class)

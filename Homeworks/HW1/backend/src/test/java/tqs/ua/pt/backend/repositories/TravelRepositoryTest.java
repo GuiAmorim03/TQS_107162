@@ -1,4 +1,4 @@
-package tqs.ua.pt.backend;
+package tqs.ua.pt.backend.repositories;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -11,7 +11,6 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
 import tqs.ua.pt.backend.models.Travel;
-import tqs.ua.pt.backend.repositories.TravelRepository;
 
 @DataJpaTest
 @SuppressWarnings("deprecation")
