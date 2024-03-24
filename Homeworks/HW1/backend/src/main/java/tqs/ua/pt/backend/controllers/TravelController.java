@@ -32,13 +32,13 @@ public class TravelController {
     }
 
     @GetMapping("/travel/{id}")
-    public Travel getTravelById(@PathVariable Long travelId) {
+    public Travel getTravelById(@PathVariable("id") Long travelId) {
         return travelService.getTravelById(travelId);
     }
 
     @GetMapping("/travel/{departure}/{arrival}/{date}")
-    public List<Travel> getTravelByRouteAndDate(@PathVariable String departure, @PathVariable String arrival,
-            @PathVariable String date) throws ParseException {
+    public List<Travel> getTravelByDepartureAndArrivalAndDate(@PathVariable("departure") String departure, @PathVariable("arrival") String arrival,
+            @PathVariable("date") String date) throws ParseException {
 
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date startDate = formatter.parse(date);
@@ -49,5 +49,12 @@ public class TravelController {
         Date endDate = calendar.getTime();
 
         return travelService.getTravelsByDepartureAndArrivalAndDate(departure, arrival, startDate, endDate);
+    }
+
+    @GetMapping("/travel/{departure}/{arrival}")
+    public List<Travel> getTravelByDepartureAndArrival(@PathVariable String departure, @PathVariable String arrival) throws ParseException {
+
+
+        return travelService.getTravelsByDepartureAndArrival(departure, arrival);
     }
 }
