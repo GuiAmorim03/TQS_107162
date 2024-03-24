@@ -36,25 +36,28 @@ public class TravelController {
         return travelService.getTravelById(travelId);
     }
 
+    @GetMapping("/travel/{departure}/{arrival}")
+    public List<Travel> getTravelByDepartureAndArrival(@PathVariable("departure") String departure, @PathVariable("arrival") String arrival) throws ParseException {
+
+        return travelService.getTravelsByDepartureAndArrival(departure, arrival);
+    }
+
+    @SuppressWarnings("deprecation")
     @GetMapping("/travel/{departure}/{arrival}/{date}")
     public List<Travel> getTravelByDepartureAndArrivalAndDate(@PathVariable("departure") String departure, @PathVariable("arrival") String arrival,
             @PathVariable("date") String date) throws ParseException {
 
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date startDate = formatter.parse(date);
+        System.out.println("esta é a data que recebe: ");
+        System.out.println(startDate);
 
         Calendar calendar = Calendar.getInstance();
+        startDate.setYear(startDate.getYear() + 1900); // uma vez que no Date(), o ano começa em 1900
         calendar.setTime(startDate);
         calendar.add(Calendar.DAY_OF_MONTH, 1); // Avançar 1 dia
         Date endDate = calendar.getTime();
 
         return travelService.getTravelsByDepartureAndArrivalAndDate(departure, arrival, startDate, endDate);
-    }
-
-    @GetMapping("/travel/{departure}/{arrival}")
-    public List<Travel> getTravelByDepartureAndArrival(@PathVariable String departure, @PathVariable String arrival) throws ParseException {
-
-
-        return travelService.getTravelsByDepartureAndArrival(departure, arrival);
     }
 }

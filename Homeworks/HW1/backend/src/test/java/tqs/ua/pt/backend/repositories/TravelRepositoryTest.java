@@ -15,7 +15,6 @@ import tqs.ua.pt.backend.models.Travel;
 @DataJpaTest
 @SuppressWarnings("deprecation")
 public class TravelRepositoryTest {
-    // Unit Tests
 
     @Autowired
     private TestEntityManager entityManager;
@@ -32,6 +31,56 @@ public class TravelRepositoryTest {
         Travel found = travelRepository.findByTravelId(travel.getTravelId());
         assertThat(found).isEqualTo(travel);
     }
+
+    @Test
+    // return a Travel that does not exist
+    void findByTravelIdNotFound() {
+        Travel travel = new Travel("Lisbon", "Porto", new Date(2024, 04, 05, 14, 30), 11.5);
+        entityManager.persistAndFlush(travel);
+
+        Travel found = travelRepository.findByTravelId(999L);
+        assertThat(found).isNull();
+    }
+
+    @Test
+    // find Travels By Departure and Arrival
+    void findByDepartureAndArrival() {
+        Travel travel1 = new Travel("Lisbon", "Madrid", new Date(2024, 04, 06, 14, 30), 15);
+        Travel travel2 = new Travel("Lisbon", "Madrid", new Date(2024, 04, 07, 14, 30), 15);
+        Travel travel3 = new Travel("Madrid", "Sevilla", new Date(2024, 04, 06, 14, 30), 15);
+        Travel travel4 = new Travel("Bilbao", "Madrid", new Date(2024, 04, 06, 14, 30), 15);
+
+        entityManager.persistAndFlush(travel1);
+        entityManager.persistAndFlush(travel2);
+        entityManager.persistAndFlush(travel3);
+        entityManager.persistAndFlush(travel4);
+
+        List<Travel> travelsFound = travelRepository.findByDepartureAndArrival("Lisbon", "Madrid");
+
+        assertThat(travelsFound).hasSize(2);
+        assertThat(travelsFound.get(0)).isEqualTo(travel1);
+        assertThat(travelsFound.get(1)).isEqualTo(travel2);
+    }
+
+    @Test
+    // find Travels By Departure, Arrival and Date
+    void findByDepartureAndArrivalAndDate() {
+        Travel travelMorning = new Travel("Lisbon", "Porto", new Date(2024, 04, 06, 10, 30), 11.5);
+        Travel travelNoon = new Travel("Lisbon", "Porto", new Date(2024, 04, 06, 17, 30), 11.5);
+        Travel travelMorningNextDay = new Travel("Lisbon", "Porto", new Date(2024, 04, 07, 10, 30), 11.5);
+        entityManager.persistAndFlush(travelMorning);
+        entityManager.persistAndFlush(travelNoon);
+        entityManager.persistAndFlush(travelMorningNextDay);
+
+        List<Travel> travelsFound = travelRepository.findByDepartureAndArrivalAndDate("Lisbon", "Porto",
+                new Date(2024, 04, 06), new Date(2024, 04, 07));
+
+        assertThat(travelsFound.get(0)).isEqualTo(travelMorning);
+        assertThat(travelsFound.get(1)).isEqualTo(travelNoon);
+    }
+
+
+    /* Os métodos seguintes foram inicialmente criados, mas depois cheguei à conclusão que não seriam necessários 
 
     @Test
     // find Travels By Departure
@@ -79,26 +128,6 @@ public class TravelRepositoryTest {
     }
 
     @Test
-    // find Travels By Departure and Arrival
-    void findByDepartureAndArrival() {
-        Travel travel1 = new Travel("Lisbon", "Madrid", new Date(2024, 04, 06, 14, 30), 15);
-        Travel travel2 = new Travel("Lisbon", "Madrid", new Date(2024, 04, 07, 14, 30), 15);
-        Travel travel3 = new Travel("Madrid", "Sevilla", new Date(2024, 04, 06, 14, 30), 15);
-        Travel travel4 = new Travel("Bilbao", "Madrid", new Date(2024, 04, 06, 14, 30), 15);
-
-        entityManager.persistAndFlush(travel1);
-        entityManager.persistAndFlush(travel2);
-        entityManager.persistAndFlush(travel3);
-        entityManager.persistAndFlush(travel4);
-
-        List<Travel> travelsFound = travelRepository.findByDepartureAndArrival("Lisbon", "Madrid");
-
-        assertThat(travelsFound).hasSize(2);
-        assertThat(travelsFound.get(0)).isEqualTo(travel1);
-        assertThat(travelsFound.get(1)).isEqualTo(travel2);
-    }
-
-    @Test
     // find Travels By Date
     void findByDate() {
         Travel travel1 = new Travel("Lisbon", "Madrid", new Date(2024, 04, 06, 14, 30), 15);
@@ -119,29 +148,6 @@ public class TravelRepositoryTest {
         assertThat(travelsFound.get(2)).isEqualTo(travel4);
     }
         
+    */
 
-    @Test
-    // find Travels By Departure, Arrival and Date
-    void findByDepartureAndArrivalAndDate() {
-        Travel travelMorning = new Travel("Lisbon", "Porto", new Date(2024, 04, 06, 10, 30), 11.5);
-        Travel travelNoon = new Travel("Lisbon", "Porto", new Date(2024, 04, 06, 17, 30), 11.5);
-        entityManager.persistAndFlush(travelMorning);
-        entityManager.persistAndFlush(travelNoon);
-
-        List<Travel> travelsFound = travelRepository.findByDepartureAndArrivalAndDate("Lisbon", "Porto",
-                new Date(2024, 04, 06), new Date(2024, 04, 07));
-
-        assertThat(travelsFound.get(0)).isEqualTo(travelMorning);
-        assertThat(travelsFound.get(1)).isEqualTo(travelNoon);
-    }
-
-    @Test
-    // return a Travel that does not exist
-    void findByTravelIdNotFound() {
-        Travel travel = new Travel("Lisbon", "Porto", new Date(2024, 04, 05, 14, 30), 11.5);
-        entityManager.persistAndFlush(travel);
-
-        Travel found = travelRepository.findByTravelId(999L);
-        assertThat(found).isNull();
-    }
 }

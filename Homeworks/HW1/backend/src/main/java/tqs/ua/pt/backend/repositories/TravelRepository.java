@@ -13,15 +13,22 @@ import tqs.ua.pt.backend.models.Travel;
 @Repository
 public interface TravelRepository extends JpaRepository<Travel, Long> {
     public Travel findByTravelId(Long travelId);
-    public List<Travel> findByDeparture(String departure);
-    public List<Travel> findByArrival(String arrival);
-    public List<Travel> findByDepartureAndArrival(String departure, String arrival);
 
-    @Query("SELECT t FROM Travel t WHERE t.date >= :startDate AND t.date < :endDate")
-    public List<Travel> findByDate(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
+    public List<Travel> findByDepartureAndArrival(String departure, String arrival);
 
     @Query("SELECT t FROM Travel t WHERE t.departure = :departure AND t.arrival = :arrival AND t.date >= :startDate AND t.date < :endDate")
     public List<Travel> findByDepartureAndArrivalAndDate(@Param("departure") String departure,
             @Param("arrival") String arrival, @Param("startDate") Date startDate, @Param("endDate") Date endDate);
 
+
+    /* Os métodos seguintes foram inicialmente criados, mas depois cheguei à conclusão que não seriam necessários 
+
+    public List<Travel> findByDeparture(String departure);
+
+    public List<Travel> findByArrival(String arrival);
+
+    @Query("SELECT t FROM Travel t WHERE t.date >= :startDate AND t.date < :endDate")
+    public List<Travel> findByDate(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
+             
+    */
 }

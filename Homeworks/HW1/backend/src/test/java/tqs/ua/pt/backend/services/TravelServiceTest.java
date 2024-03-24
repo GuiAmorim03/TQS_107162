@@ -26,44 +26,43 @@ public class TravelServiceTest {
 
     @InjectMocks
     private TravelService travelService;
+
+    private Travel iberian, centralEurope, uk, portuguese1, portuguese2, portuguese3;
     
 
     @BeforeEach
     public void setUp() {
 
-        Travel iberian = new Travel("Lisbon", "Madrid", new Date(2024, 4, 7, 14, 30), 13.5);
+        iberian = new Travel("Lisbon", "Madrid", new Date(2024, 4, 7, 14, 30), 13.5);
         iberian.setTravelId(1L);
-        Travel centralEurope = new Travel("Berlin", "Prague", new Date(2024, 4, 8, 11, 30), 8.5);
-        Travel uk = new Travel("London", "Edinburgh", new Date(2024, 4, 7, 10, 30), 10.5);
-        Travel southEurope = new Travel("Rome", "Prague", new Date(2024, 4, 8, 12, 30), 15.5);
+        centralEurope = new Travel("Berlin", "Prague", new Date(2024, 4, 8, 11, 30), 8.5);
+        uk = new Travel("London", "Edinburgh", new Date(2024, 4, 7, 10, 30), 10.5);
 
-        List<Travel> allTravels = Arrays.asList(iberian, centralEurope, uk, southEurope);
-
-        Mockito.when(travelRepository.findByTravelId(iberian.getTravelId())).thenReturn(iberian);
-        Mockito.when(travelRepository.findByTravelId(centralEurope.getTravelId())).thenReturn(centralEurope);
-        Mockito.when(travelRepository.findByTravelId(uk.getTravelId())).thenReturn(uk);
-        Mockito.when(travelRepository.findByTravelId(southEurope.getTravelId())).thenReturn(southEurope);
-        Mockito.when(travelRepository.findByTravelId(-99L)).thenReturn(null);
-
-        Mockito.when(travelRepository.findAll()).thenReturn(allTravels);
+        portuguese1 = new Travel("Lisbon", "Porto", new Date(2024, 4, 5, 14, 30), 11.5);
+        portuguese2 = new Travel("Lisbon", "Porto", new Date(2024, 4, 5, 18, 30), 11.5);
+        portuguese3 = new Travel("Lisbon", "Porto", new Date(2024, 4, 6, 14, 30), 11.5);
     }
 
     @Test
     // create new travel
     void testSaveTravel() {
-        Travel travel = new Travel("Lisbon", "Porto", new Date(2024, 4, 5, 14, 30), 11.5);
+        Mockito.when(travelRepository.save(iberian)).thenReturn(iberian);
 
-        Mockito.when(travelRepository.save(travel)).thenReturn(travel);
-
-        assertThat(travelService.save(travel).getDeparture()).isEqualTo("Lisbon");
-        assertThat(travelService.save(travel).getArrival()).isEqualTo("Porto");
+        assertThat(travelService.save(iberian).getDeparture()).isEqualTo("Lisbon");
+        assertThat(travelService.save(iberian).getArrival()).isEqualTo("Madrid");
+        assertThat(travelService.save(iberian).getDate()).isEqualTo(new Date(2024, 4, 7, 14, 30));
+        assertThat(travelService.save(iberian).getPrice()).isEqualTo(13.5);
+        assertThat(travelService.save(iberian).getSeats()).isEqualTo(0);
     }
 
     @Test
     // find Travel By Id
     void whenSearchTravelById_thenReturnTravel() {
+        Mockito.when(travelRepository.findByTravelId(iberian.getTravelId())).thenReturn(iberian);
+
         Long id = 1L;
         Travel travel = travelService.getTravelById(id);
+
         assertThat(travel.getDeparture()).isEqualTo("Lisbon");
         assertThat(travel.getArrival()).isEqualTo("Madrid");
         assertThat(travel.getDate()).isEqualTo(new Date(2024, 4, 7, 14, 30));
@@ -74,16 +73,58 @@ public class TravelServiceTest {
     @Test
     // find Travel By Id that does not exist
     void whenSearchInvalidId_thenTravelShouldBeNotFound() {
+        Mockito.when(travelRepository.findByTravelId(-99L)).thenReturn(null);
+
         Long id = -99L;
         assertThat(travelService.getTravelById(id)).isNull();
     }
 
     @Test
+    // get Travels By Departure and Arrival for any date
+    void whenSearchByDepartureAndArrival_thenReturnTravelsForAllDates() {
+        Mockito.when(travelRepository.findByDepartureAndArrival("Lisbon", "Porto")).thenReturn(Arrays.asList(portuguese1, portuguese2, portuguese3));
+
+        List<Travel> travels = travelService.getTravelsByDepartureAndArrival("Lisbon", "Porto");
+
+        assertThat(travels.size()).isEqualTo(3);
+        for (int i = 0; i < travels.size(); i++) {
+            assertThat(travels.get(i).getDeparture()).isEqualTo("Lisbon");
+            assertThat(travels.get(i).getArrival()).isEqualTo("Porto");
+            assertThat(travels.get(i).getPrice()).isEqualTo(11.5);
+            assertThat(travels.get(i).getSeats()).isEqualTo(0);
+        }
+        assertThat(travels.get(0).getDate()).isEqualTo(new Date(2024, 4, 5, 14, 30));
+        assertThat(travels.get(1).getDate()).isEqualTo(new Date(2024, 4, 5, 18, 30));
+        assertThat(travels.get(2).getDate()).isEqualTo(new Date(2024, 4, 6, 14, 30));
+    }
+
+    @Test
+    // get Travels By Departure and Arrival for a specific date
+    void whenSearchByDepartureAndArrivalAndDate_thenReturnTravelsForThatDate() {
+        Mockito.when(travelRepository.findByDepartureAndArrivalAndDate("Lisbon", "Porto", new Date(2024, 4, 5), new Date(2024, 4, 6))).thenReturn(Arrays.asList(portuguese1, portuguese2));
+
+        List<Travel> travels = travelService.getTravelsByDepartureAndArrivalAndDate("Lisbon", "Porto", new Date(2024, 4, 5), new Date(2024, 4, 6));
+
+        assertThat(travels.size()).isEqualTo(2);
+        for (int i = 0; i < travels.size(); i++) {
+            assertThat(travels.get(i).getDeparture()).isEqualTo("Lisbon");
+            assertThat(travels.get(i).getArrival()).isEqualTo("Porto");
+            assertThat(travels.get(i).getPrice()).isEqualTo(11.5);
+            assertThat(travels.get(i).getSeats()).isEqualTo(0);
+        }
+        assertThat(travels.get(0).getDate()).isEqualTo(new Date(2024, 4, 5, 14, 30));
+        assertThat(travels.get(1).getDate()).isEqualTo(new Date(2024, 4, 5, 18, 30));
+    }
+
+    @Test
     // get all Travels
     void testGetAllTravels() {
+        Mockito.when(travelRepository.findAll()).thenReturn(Arrays.asList(iberian, centralEurope, uk, portuguese1, portuguese2, portuguese3));
+
         List<Travel> travels = travelService.getAllTravels();
 
-        assertThat(travels.size()).isEqualTo(4);
+
+        assertThat(travels.size()).isEqualTo(6);
         
         assertThat(travels.get(0).getDeparture()).isEqualTo("Lisbon");
         assertThat(travels.get(0).getArrival()).isEqualTo("Madrid");
@@ -100,10 +141,20 @@ public class TravelServiceTest {
         assertThat(travels.get(2).getDate()).isEqualTo(new Date(2024, 4, 7, 10, 30));
         assertThat(travels.get(2).getPrice()).isEqualTo(10.5);
 
-        assertThat(travels.get(3).getDeparture()).isEqualTo("Rome");
-        assertThat(travels.get(3).getArrival()).isEqualTo("Prague");
-        assertThat(travels.get(3).getDate()).isEqualTo(new Date(2024, 4, 8, 12, 30));
-        assertThat(travels.get(3).getPrice()).isEqualTo(15.5);
+        assertThat(travels.get(3).getDeparture()).isEqualTo("Lisbon");
+        assertThat(travels.get(3).getArrival()).isEqualTo("Porto");
+        assertThat(travels.get(3).getDate()).isEqualTo(new Date(2024, 4, 5, 14, 30));
+        assertThat(travels.get(3).getPrice()).isEqualTo(11.5);
+
+        assertThat(travels.get(4).getDeparture()).isEqualTo("Lisbon");
+        assertThat(travels.get(4).getArrival()).isEqualTo("Porto");
+        assertThat(travels.get(4).getDate()).isEqualTo(new Date(2024, 4, 5, 18, 30));
+        assertThat(travels.get(4).getPrice()).isEqualTo(11.5);
+
+        assertThat(travels.get(5).getDeparture()).isEqualTo("Lisbon");
+        assertThat(travels.get(5).getArrival()).isEqualTo("Porto");
+        assertThat(travels.get(5).getDate()).isEqualTo(new Date(2024, 4, 6, 14, 30));
+        assertThat(travels.get(5).getPrice()).isEqualTo(11.5);
 
         for (int i = 0; i<travels.size(); i++) {
             assertThat(travels.get(i).getSeats()).isEqualTo(0);
