@@ -87,12 +87,27 @@ public class TravelServiceTest {
         
         assertThat(travels.get(0).getDeparture()).isEqualTo("Lisbon");
         assertThat(travels.get(0).getArrival()).isEqualTo("Madrid");
+        assertThat(travels.get(0).getDate()).isEqualTo(new Date(2024, 4, 7, 14, 30));
+        assertThat(travels.get(0).getPrice()).isEqualTo(13.5);
+
         assertThat(travels.get(1).getDeparture()).isEqualTo("Berlin");
         assertThat(travels.get(1).getArrival()).isEqualTo("Prague");
+        assertThat(travels.get(1).getDate()).isEqualTo(new Date(2024, 4, 8, 11, 30));
+        assertThat(travels.get(1).getPrice()).isEqualTo(8.5);
+
         assertThat(travels.get(2).getDeparture()).isEqualTo("London");
         assertThat(travels.get(2).getArrival()).isEqualTo("Edinburgh");
+        assertThat(travels.get(2).getDate()).isEqualTo(new Date(2024, 4, 7, 10, 30));
+        assertThat(travels.get(2).getPrice()).isEqualTo(10.5);
+
         assertThat(travels.get(3).getDeparture()).isEqualTo("Rome");
         assertThat(travels.get(3).getArrival()).isEqualTo("Prague");
+        assertThat(travels.get(3).getDate()).isEqualTo(new Date(2024, 4, 8, 12, 30));
+        assertThat(travels.get(3).getPrice()).isEqualTo(15.5);
+
+        for (int i = 0; i<travels.size(); i++) {
+            assertThat(travels.get(i).getSeats()).isEqualTo(0);
+        }
     }
 
 }
