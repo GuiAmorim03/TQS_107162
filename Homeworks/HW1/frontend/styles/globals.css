@@ -1,0 +1,36 @@
+.jumbotron {
+    height: 400px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.search-trip-section {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    border-radius: 25px;
+    background-color: rgb(255, 196, 0);
+}
+
+.search-trip-section-header {
+    background-color: #1d1d1d;
+    color: rgb(255, 196, 0);
+    text-align: center;
+    border-radius: 25px 25px 0 0;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.search-trip-section-body {
+    font-size: 25px;
+}
+
+.search-trip-section-description {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.col-3 select,
+.col-4 select {
+    width: 150px;
+}

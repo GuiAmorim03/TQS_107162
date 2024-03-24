@@ -4,85 +4,59 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+    <title>BuzzyTrips | Search for a Trip</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
         integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="styles/globals.css" />
     <link rel='icon' href="images/bus-icon.png">
-
-    <style>
-        .jumbotron {
-            height: 400px;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-        }
-
-        .search-section {
-            margin-top: 50px;
-            margin-bottom: 50px;
-            border: 1px solid #1d1d1d;
-            border-radius: 25px;
-            background-color: rgb(255, 196, 0);
-        }
-
-        .search-section-header {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .search-section-body {
-            font-size: 25px;
-        }
-    </style>
+ 
 </head>
 
 <body>
-    <div class="jumbotron" style="background-image: url(images/bus.png);"></div>
+    <div class="jumbotron" style="background-image: url(images/bus-trip.png);"></div>
 
-    <div class="container search-section">
-        <div class="search-section-header p-2">
-            <h2>Search for Bus Connections</h2>
-            <h5>In the moment, we only provide trips between major cities</h5>
+    <div class="container search-trip-section p-0">
+        <div class="search-trip-section-header p-2">
+            BuzzyTrips
         </div>
-        <div class="row search-section-body p-2">
+        <div class="row search-trip-section-body p-3">
+            <div class="row search-trip-section-description">
+                <h3>Search for Bus Connections</h3>
+                <h5>In the moment, we only provide trips between major cities</h5>
+            </div>
             <div class="col-3">
                 <label for="origin"><b>Origin </b></label>
-                <select id="origin">
+                <select id="origin" onchange="updateDestinationOptions()">
                     <option value="Lisbon">Lisbon</option>
                     <option value="Madrid">Madrid</option>
+                    <option value="Paris">Paris</option>
                     <!-- just examples -->
                 </select>
             </div>
-            <div class="col-3">
+            <div class="col-4">
                 <label for="destination"><b>Destination </b></label>
                 <select id="destination">
-                    <option value="Lisbon">Lisbon</option>
-                    <option value="Madrid">Madrid</option>
-                    <!-- just examples -->
+                    <!-- as opções vão ser atualizadas dinamicamente atraves de js -->
                 </select>
             </div>
-            <div class="col-5">
+            <div class="col-4">
                 <label for="date"><b>Date </b></label>
-                <input type="date" id="date" required>
-                <span class="d-none text-danger" id="date-error" style="font-size: medium;"><i class="fas fa-exclamation-triangle"></i> Please select a date</span>
+                <input type="date" id="date" required min="yyyy-MM-dd">
             </div>
             <div class="col-1">
                 <button class="btn btn-dark" onclick="searchTrip()">Search</button>
             </div>
         </div>
-        <!-- Aqui você pode adicionar um espaço para exibir os resultados da pesquisa -->
-        <div id="search-results"></div>
-
     </div>
 
 
     <!-- Footer -->
     <div class="footer fixed-bottom bg-dark text-white text-center">
-        © 2023 Guilherme Amorim
+        © 2024 Guilherme Amorim
     </div>
-
     <!-- Footer -->
 
 
@@ -91,24 +65,53 @@
         crossorigin="anonymous"></script>
 
     <script>
+
+        // search Trips
         function searchTrip() {
             const origin = document.getElementById('origin').value;
             const destination = document.getElementById('destination').value;
             const date = document.getElementById('date').value;
 
-            if (!date) {
-                document.getElementById('date-error').classList.remove('d-none');
-                return;
-            }
-
-            console.log('Searching for trips from ' + origin + ' to ' + destination + ' on ' + date);
+            console.log('Searching for trips from ' + origin + ' to ' + destination);
+            console.log('Date: ' + ((date === '') ? 'soon' : date))
 
             setTimeout(() => {
                 window.location.href = 'trips/chooseTicket.html';
             }, 1000);
         }
 
+        // não deixar escolher dias antes de hoje
+        var today = new Date();
+        var formattedDate = today.getFullYear() + '-' + (today.getMonth() + 1 < 10 ? '0' : '') + (today.getMonth() + 1) + '-' + (today.getDate() < 10 ? '0' : '') + today.getDate();
+        document.getElementById('date').min = formattedDate;
+
+
+        // não permitir que a partida e o destino sejam os mesmos
+        function updateDestinationOptions() {
+            var originSelect = document.getElementById('origin');
+            var destinationSelect = document.getElementById('destination');
+            var initialDestinationValue = destinationSelect.value;
+            destinationSelect.innerHTML = '';
+            var foundSelectedValue = false;
+            for (var i = 0; i < originSelect.options.length; i++) {
+                if (!originSelect.options[i].selected) {
+                    var option = document.createElement('option');
+                    option.value = originSelect.options[i].value;
+                    option.textContent = originSelect.options[i].textContent;
+                    destinationSelect.appendChild(option);
+                    if (option.value === initialDestinationValue) {
+                        foundSelectedValue = true;
+                    }
+                }
+            }
+            if (foundSelectedValue) {
+                destinationSelect.value = initialDestinationValue;
+            }
+        }
+        updateDestinationOptions();
+
     </script>
+
 
 </body>
 
