@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+    <title>BuzzyTrips | Make Reservation</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+        integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="../styles/globals.css" />
+    <link rel='icon' href="../images/bus-icon.png">
+
+</head>
+
+<body>
+    <div class="jumbotron" style="background-image: url(../images/bus-reservation.png);"></div>
+
+    <div class="container make-reservation-section p-0">
+        <div class="make-reservation-section-header p-2">
+            BuzzyTrips
+        </div>
+        <div class="row make-reservation-section-body p-3">
+            <div class="row make-reservation-section-description">
+                <h3>Make your reservation</h3>
+            </div>
+
+            <div class="row">
+                <div class="col-6 mb-3">
+                    <label for="name" class="form-label">Name:</label>
+                    <input type="text" class="form-control" id="name" required>
+                </div>
+                <div class="col-6 mb-3">
+                    <label for="email" class="form-label">Email:</label>
+                    <input type="email" class="form-control" id="email" required>
+                </div>
+                <div class="col-6 mb-3">
+                    <label for="phone" class="form-label">Phone Number:</label>
+                    <input type="tel" class="form-control" id="phone" required>
+                </div>
+                <div class="col-6 mb-3">
+                    <label for="nif" class="form-label">NIF:</label>
+                    <input type="text" class="form-control" id="nif" required>
+                </div>
+                <div class="col-12 mb-3">
+                    <label for="address" class="form-label">Address:</label>
+                    <textarea class="form-control" id="address" rows="3" required></textarea>
+                </div>
+                <div class="col-6 mb-3">
+                    <label for="payment" class="form-label">Payment Method:</label>
+                    <select class="form-select" id="payment" required>
+                        <option value="mb_way">MB Way</option>
+                        <option value="bank_card">Bank Card</option>
+                        <option value="paypal">PayPal</option>
+                    </select>
+                </div>
+                <div class="col-6 mb-3">
+                    <label for="card_number" class="form-label">Card Number:</label>
+                    <input type="text" class="form-control" id="card_number">
+                </div>
+                <div class="col-12 mb-3 text-end">
+                    <label for="numTickets" class="form-label" style="margin: 0;">Qtt </label>
+                    <select style="width: 50px; border: 0; border-radius: 5px;" id="numTickets" required>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+                </div>
+                <div class="col-12 mb-3 text-end">
+                    <button type="submit" class="btn btn-dark" onclick="makeReservation()">Make Reservation</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Footer -->
+    <div class="footer fixed-bottom bg-dark text-white text-center">
+        © 2024 Guilherme Amorim
+    </div>
+    <!-- Footer -->
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+    <script>
+        function makeReservation() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const nif = document.getElementById('nif').value;
+            const address = document.getElementById('address').value;
+            const payment = document.getElementById('payment').value;
+            const card_number = document.getElementById('card_number').value;
+            const numTickets = document.getElementById('numTickets').value;
+
+            console.log('Name: ' + name);
+            console.log('Email: ' + email);
+            console.log('Phone: ' + phone);
+            console.log('NIF: ' + nif);
+            console.log('Address: ' + address);
+            console.log('Payment: ' + payment);
+            console.log('Card Number: ' + card_number);
+            console.log('Number of Tickets: ' + numTickets);
+
+            setTimeout(() => {
+                window.location.href = 'reservationSuccess.html';
+            }, 1000);
+        }
+    </script>
+</body>
+
+</html>
