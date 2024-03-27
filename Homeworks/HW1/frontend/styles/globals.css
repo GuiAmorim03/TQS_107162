@@ -5,7 +5,7 @@
     background-size: cover;
 }
 
-.search-trip-section, .choose-ticket-section, .make-reservation-section{
+.search-trip-section, .choose-ticket-section, .make-reservation-section, .reservation-success-section{
     margin-top: 50px;
     margin-bottom: 50px;
     border-radius: 25px;
@@ -23,8 +23,13 @@
     background-color: rgb(35, 255, 11);
 }
 
+.reservation-success-section {
+    background-color: rgb(231, 27, 0);
+}
 
-.search-trip-section-header, .choose-ticket-section-header, .make-reservation-section-header{
+
+
+.search-trip-section-header, .choose-ticket-section-header, .make-reservation-section-header, .reservation-success-section-header{
     background-color: #1d1d1d;
     text-align: center;
     border-radius: 25px 25px 0 0;
@@ -44,13 +49,17 @@
     color: rgb(35, 255, 11);
 }
 
+.reservation-success-section-header {
+    color: rgb(231, 27, 0);
+}
 
 
-.search-trip-section-body, .choose-ticket-section-body, .make-reservation-section-body {
+
+.search-trip-section-body, .choose-ticket-section-body, .make-reservation-section-body, .reservation-success-section-body {
     font-size: 25px;
 }
 
-.search-trip-section-description, .choose-ticket-section-description, .make-reservation-section-description {
+.search-trip-section-description, .choose-ticket-section-description, .make-reservation-section-description, .reservation-success-section-description {
     margin-bottom: 20px;
     text-align: center;
 }
