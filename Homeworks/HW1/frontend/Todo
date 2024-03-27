@@ -1,1 +1,3 @@
 - é necessário GET para departures e arrivals
+- adicionar duração da viagem e na classe Travel calcular a hora de chegada atraves do calculo da hora de partida + duração da viagem
+- mudar a logica dos seats da Travel, para começar com o valor maximo e tender para zero, ao longo do tempo

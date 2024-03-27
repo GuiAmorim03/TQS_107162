@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+    <title>BuzzyTrips | Search for a Ticket</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+        integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="../styles/globals.css" />
+    <link rel='icon' href="../images/bus-icon.png">
+
+</head>
+
+<body>
+    <div class="jumbotron" style="background-image: url(../images/bus-ticket.png);"></div>
+
+    <div class="container choose-ticket-section p-0">
+        <div class="choose-ticket-section-header p-2">
+            BuzzyTrips
+        </div>
+        <div class="row choose-ticket-section-body p-3">
+            <div class="row choose-ticket-section-description">
+                <h3>Search for Bus Tickets</h3>
+                <h5>From Lisbon to Madrid on <span id="currentDate"></span></h5>
+            </div>
+
+            <div id="ticketsContainer">
+
+            </div>
+        </div>
+
+
+        <!-- Footer -->
+        <div class="footer fixed-bottom bg-dark text-white text-center">
+            © 2024 Guilherme Amorim
+        </div>
+        <!-- Footer -->
+
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+
+
+        <script>
+            // Dados dos bilhetes
+            var tickets = [
+                {
+                    trip: 100,
+                    from: "Lisbon",
+                    to: "Madrid",
+                    duration: "6h",
+                    price: 20,
+                    departTime: "10:00",
+                    arriveTime: "16:00",
+                    seats: 11
+                },
+                {
+                    trip: 200,
+                    from: "Lisbon",
+                    to: "Madrid",
+                    duration: "6h30",
+                    price: 25,
+                    departTime: "14:00",
+                    arriveTime: "20:30",
+                    seats: 0
+                },
+                {
+                    trip: 300,
+                    from: "Lisbon",
+                    to: "Madrid",
+                    duration: "5h30",
+                    price: 30,
+                    departTime: "18:00",
+                    arriveTime: "23:30",
+                    seats: 30
+                }
+            ];
+
+            // Função para gerar bilhetes dinamicamente na página
+            function generateTickets() {
+                var ticketsContainer = document.getElementById("ticketsContainer");
+                tickets.forEach(function (ticket, index) {
+                    var ticketAvailable = ticket.seats === 0 ? "btn-secondary disabled" : "btn-primary";
+
+                    var ticketDiv = document.createElement("div");
+                    ticketDiv.classList.add("row", "ticket");
+                    ticketDiv.innerHTML = `
+                            <div class="col-9">
+                                <div class="row ticket-schedule">
+                                    <div class="col-4 text-end">
+                                        ${ticket.departTime} 
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="divider-custom">
+                                            <div class="divider-custom-line"></div>
+                                            ${ticket.duration}
+                                            <div class="divider-custom-line"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        ${ticket.arriveTime}
+                                    </div>
+                                </div>
+                                <div class="row ticket-locals">
+                                    <div class="col-4 text-end">
+                                        ${ticket.from} 
+                                    </div>
+                                    <div class="col-4">
+                                    </div>
+                                    <div class="col-4">
+                                        ${ticket.to}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-3 text-end">
+                                <p class="ticket-price">
+                                    ${ticket.price}
+                                </p>
+                                <button type="button" id="${ticket.trip}" class="btn ${ticketAvailable}" onclick="chooseTickets()">Buy Ticket</button>
+                            </div>
+                        `;
+                    ticketsContainer.appendChild(ticketDiv);
+                });
+            }
+
+            // Chamar a função para gerar bilhetes
+            generateTickets();
+
+            // dia de hoje
+            var today = new Date();
+            var options = { year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('currentDate').textContent = today.toLocaleDateString('en-US', options);
+
+
+
+            // choose Tickets
+            function chooseTickets() {
+
+                console.log('Choosing ticket ' + event.target.id);
+
+                
+                setTimeout(() => {
+                    window.location.href = 'makeReservation.html';
+                }, 1000);
+            }
+
+        </script>
+
+
+
+</body>
+
+</html>

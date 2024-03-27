@@ -30,7 +30,71 @@
     text-align: center;
 }
 
+.choose-ticket-section {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    border-radius: 25px;
+    background-color: rgb(0, 150, 195);
+}
+
+.choose-ticket-section-header {
+    background-color: #1d1d1d;
+    color: rgb(0, 150, 195);
+    text-align: center;
+    border-radius: 25px 25px 0 0;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.choose-ticket-section-body {
+    font-size: 25px;
+}
+
+.choose-ticket-section-description {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.ticket {
+    background-color: white;
+    border-radius: 25px;
+    margin: 2.5rem;
+    padding: 2.5rem;
+    border: 3px solid #1d1d1d;
+}
+
+.ticket-schedule, .ticket-price {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.ticket-locals {
+    font-size: 20px;
+}
+
 .col-3 select,
 .col-4 select {
     width: 150px;
 }
+
+
+.divider-custom {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .divider-custom .divider-custom-line {
+    width: 100%;
+    max-width: 5rem;
+    height: 0.15rem;
+    background-color: #2b2b2e;
+    border-radius: 1rem;
+    border-color: #2b2b2e;
+  }
+  .divider-custom .divider-custom-line:first-child {
+    margin-right: 1rem;
+  }
+  .divider-custom .divider-custom-line:last-child {
+    margin-left: 1rem;
+  }
