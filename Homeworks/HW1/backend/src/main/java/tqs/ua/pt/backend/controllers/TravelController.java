@@ -60,4 +60,14 @@ public class TravelController {
 
         return travelService.getTravelsByDepartureAndArrivalAndDate(departure, arrival, startDate, endDate);
     }
+
+    @GetMapping("/departures")
+    public List<String> getDepartures() {
+        return travelService.getAllDepartures();
+    }
+
+    @GetMapping("/arrivals")
+    public List<String> getArrivals() {
+        return travelService.getAllArrivals();
+    }
 }

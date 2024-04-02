@@ -1,5 +1,6 @@
 package tqs.ua.pt.backend.services;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -34,4 +35,31 @@ public class TravelService {
     public List<Travel> getAllTravels() {
         return travelRepository.findAll();
     }
+
+    public List<String> getAllDepartures() {
+        List<Travel> travels = travelRepository.findAll();
+        List<String> departures = new ArrayList<>();
+        
+        for (Travel travel : travels) {
+            if (!departures.contains(travel.getDeparture())) {
+                departures.add(travel.getDeparture());
+            }
+        }
+
+        return departures;
+    }
+
+    public List<String> getAllArrivals() {
+        List<Travel> travels = travelRepository.findAll();
+        List<String> arrivals = new ArrayList<>();
+        
+        for (Travel travel : travels) {
+            if (!arrivals.contains(travel.getArrival())) {
+                arrivals.add(travel.getArrival());
+            }
+        }
+
+        return arrivals;
+    }
+
 }

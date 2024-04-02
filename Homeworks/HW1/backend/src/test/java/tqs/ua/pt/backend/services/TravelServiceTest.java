@@ -161,4 +161,31 @@ public class TravelServiceTest {
         }
     }
 
+    @Test
+    // get all Departures
+    void testGetAllDepartures() {
+        Mockito.when(travelRepository.findAll()).thenReturn(Arrays.asList(iberian, centralEurope, uk, portuguese1, portuguese2, portuguese3));
+
+        List<String> departures = travelService.getAllDepartures();
+
+        assertThat(departures.size()).isEqualTo(3);
+        assertThat(departures.get(0)).isEqualTo("Lisbon");
+        assertThat(departures.get(1)).isEqualTo("Berlin");
+        assertThat(departures.get(2)).isEqualTo("London");
+    }
+
+    @Test
+    // get all Arrivals
+    void testGetAllArrivals() {
+        Mockito.when(travelRepository.findAll()).thenReturn(Arrays.asList(iberian, centralEurope, uk, portuguese1, portuguese2, portuguese3));
+
+        List<String> arrivals = travelService.getAllArrivals();
+
+        assertThat(arrivals.size()).isEqualTo(4);
+        assertThat(arrivals.get(0)).isEqualTo("Madrid");
+        assertThat(arrivals.get(1)).isEqualTo("Prague");
+        assertThat(arrivals.get(2)).isEqualTo("Edinburgh");
+        assertThat(arrivals.get(3)).isEqualTo("Porto");
+    }
+
 }
