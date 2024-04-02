@@ -25,15 +25,15 @@ public class Travel {
         this.departure = departure;
         this.arrival = arrival;
         this.date = date;
-        this.seats = 0;
+        this.seats = MAX_SEATS;
         this.price = price;
     }
 
     public void addSeats(int seats) {
-        if (this.seats + seats > MAX_SEATS) {
+        if (this.seats - seats < 0) {
             throw new IllegalArgumentException("Not enough seats available");
         } else {
-            this.seats += seats;
+            this.seats -= seats;
         }
     }
 
