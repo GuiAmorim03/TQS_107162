@@ -25,7 +25,7 @@ public class TravelRepositoryTest {
     @Test
     // find Travel By Id
     void findByTravelId() {
-        Travel travel = new Travel("Lisbon", "Porto", new Date(2024, 04, 05, 14, 30), 11.5);
+        Travel travel = new Travel("Lisbon", "Porto", new Date(2024, 04, 05, 14, 30), 250, 11.5);
         entityManager.persistAndFlush(travel);
 
         Travel found = travelRepository.findByTravelId(travel.getTravelId());
@@ -35,7 +35,7 @@ public class TravelRepositoryTest {
     @Test
     // return a Travel that does not exist
     void findByTravelIdNotFound() {
-        Travel travel = new Travel("Lisbon", "Porto", new Date(2024, 04, 05, 14, 30), 11.5);
+        Travel travel = new Travel("Lisbon", "Porto", new Date(2024, 04, 05, 14, 30), 250, 11.5);
         entityManager.persistAndFlush(travel);
 
         Travel found = travelRepository.findByTravelId(999L);
@@ -45,10 +45,10 @@ public class TravelRepositoryTest {
     @Test
     // find Travels By Departure and Arrival
     void findByDepartureAndArrival() {
-        Travel travel1 = new Travel("Lisbon", "Madrid", new Date(2024, 04, 06, 14, 30), 15);
-        Travel travel2 = new Travel("Lisbon", "Madrid", new Date(2024, 04, 07, 14, 30), 15);
-        Travel travel3 = new Travel("Madrid", "Sevilla", new Date(2024, 04, 06, 14, 30), 15);
-        Travel travel4 = new Travel("Bilbao", "Madrid", new Date(2024, 04, 06, 14, 30), 15);
+        Travel travel1 = new Travel("Lisbon", "Madrid", new Date(2024, 04, 06, 14, 30), 400, 15);
+        Travel travel2 = new Travel("Lisbon", "Madrid", new Date(2024, 04, 07, 14, 30), 400, 15);
+        Travel travel3 = new Travel("Madrid", "Sevilla", new Date(2024, 04, 06, 14, 30), 400, 15);
+        Travel travel4 = new Travel("Bilbao", "Madrid", new Date(2024, 04, 06, 14, 30), 300, 15);
 
         entityManager.persistAndFlush(travel1);
         entityManager.persistAndFlush(travel2);
@@ -65,9 +65,9 @@ public class TravelRepositoryTest {
     @Test
     // find Travels By Departure, Arrival and Date
     void findByDepartureAndArrivalAndDate() {
-        Travel travelMorning = new Travel("Lisbon", "Porto", new Date(2024, 04, 06, 10, 30), 11.5);
-        Travel travelNoon = new Travel("Lisbon", "Porto", new Date(2024, 04, 06, 17, 30), 11.5);
-        Travel travelMorningNextDay = new Travel("Lisbon", "Porto", new Date(2024, 04, 07, 10, 30), 11.5);
+        Travel travelMorning = new Travel("Lisbon", "Porto", new Date(2024, 04, 06, 10, 30), 350, 11.5);
+        Travel travelNoon = new Travel("Lisbon", "Porto", new Date(2024, 04, 06, 17, 30), 350, 11.5);
+        Travel travelMorningNextDay = new Travel("Lisbon", "Porto", new Date(2024, 04, 07, 10, 30), 350, 11.5);
         entityManager.persistAndFlush(travelMorning);
         entityManager.persistAndFlush(travelNoon);
         entityManager.persistAndFlush(travelMorningNextDay);

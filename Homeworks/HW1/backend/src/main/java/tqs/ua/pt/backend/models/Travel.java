@@ -15,18 +15,23 @@ public class Travel {
     private Long travelId;
     private String departure;
     private String arrival;
-    private Date date;
+    private Date dateDeparture;
+    private Date dateArrival;
+    private int travelDuration; // minutos
     private int seats;
     private double price;
 
     private int MAX_SEATS = 25;
 
-    public Travel(String departure, String arrival, Date date, double price) {
+    public Travel(String departure, String arrival, Date dateDeparture, int travelDuration, double price) {
         this.departure = departure;
         this.arrival = arrival;
-        this.date = date;
+        this.dateDeparture = dateDeparture;
+        this.travelDuration = travelDuration;
         this.seats = MAX_SEATS;
         this.price = price;
+
+        this.dateArrival = new Date(dateDeparture.getTime() + travelDuration * 60 * 1000); // vezes 60 segundos e 1000 milisegundos
     }
 
     public void addSeats(int seats) {
@@ -63,12 +68,28 @@ public class Travel {
         this.arrival = arrival;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getDateDeparture() {
+        return dateDeparture;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setDateDeparture(Date dateDeparture) {
+        this.dateDeparture = dateDeparture;
+    }
+
+    public Date getDateArrival() {
+        return dateArrival;
+    }
+
+    public void setDateArrival(Date dateArrival) {
+        this.dateArrival = dateArrival;
+    }
+
+    public int getTravelDuration() {
+        return travelDuration;
+    }
+
+    public void setTravelDuration(int travelDuration) {
+        this.travelDuration = travelDuration;
     }
 
     public int getSeats() {
@@ -93,7 +114,9 @@ public class Travel {
                 "travelId=" + travelId +
                 ", departure='" + departure + '\'' +
                 ", arrival='" + arrival + '\'' +
-                ", date=" + date +
+                ", dateDeparture=" + dateDeparture +
+                ", dateArrival=" + dateArrival +
+                ", travelDuration=" + travelDuration +
                 ", seats=" + seats +
                 ", price=" + price +
                 '}';
