@@ -34,6 +34,10 @@ public class Travel {
         this.dateArrival = new Date(dateDeparture.getTime() + travelDuration * 60 * 1000); // vezes 60 segundos e 1000 milisegundos
     }
 
+    public Travel() {
+   
+    }
+
     public void addSeats(int seats) {
         if (this.seats - seats < 0) {
             throw new IllegalArgumentException("Not enough seats available");

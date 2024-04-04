@@ -36,6 +36,10 @@ public class Reservation {
         this.qtt = qtt;
     }
 
+    public Reservation() {
+
+    }
+
     // getters and setters
 
     public Long getToken() {
