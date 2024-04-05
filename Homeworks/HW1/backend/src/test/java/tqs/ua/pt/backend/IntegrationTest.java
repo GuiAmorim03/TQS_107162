@@ -3,6 +3,7 @@ package tqs.ua.pt.backend;
 import java.util.Date;
 import java.util.List;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +46,12 @@ public class IntegrationTest {
         travel = new Travel("Lisbon", "Porto", new Date(2024, 4, 5, 11, 30), 200, 10);
     }
 
+    @AfterEach
+    public void resetDb() {
+        reservationRepository.deleteAll();
+        travelRepository.deleteAll();
+    }
+
     @Test
     void whenValidInput_thenCreateTravel() {
         restTemplate.postForEntity("/api/travel", travel, Travel.class);
@@ -59,7 +66,7 @@ public class IntegrationTest {
     @Test
     void whenValidInput_thenCreateReservation() {
         travelRepository.save(travel); // é necessário guardar a viagem antes de criar a reserva
-        Reservation reservation = new Reservation(travel, "Joao", "j@a.pt", "123456789", "123456789", "Rua", "MB", "123456789", 2);
+        Reservation reservation = new Reservation(travel, "Joao", "j@a.pt", "123456789", "123456789", "Rua", "MB WAY", "123456789", 2);
      
         restTemplate.postForEntity("/api/reservation", reservation, Reservation.class);
 
