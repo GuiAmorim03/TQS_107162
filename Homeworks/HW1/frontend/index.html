@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
     <link rel="stylesheet" href="styles/globals.css" />
     <link rel='icon' href="images/bus-icon.png">
- 
+
 </head>
 
 <body>
@@ -30,10 +30,7 @@
             <div class="col-3">
                 <label for="origin"><b>Origin </b></label>
                 <select id="origin" onchange="updateDestinationOptions()">
-                    <option value="Lisbon">Lisbon</option>
-                    <option value="Madrid">Madrid</option>
-                    <option value="Paris">Paris</option>
-                    <!-- just examples -->
+                    <!-- API -->
                 </select>
             </div>
             <div class="col-4">
@@ -66,6 +63,60 @@
 
     <script>
 
+        // chamada à api para obter as cidades de partida
+        document.addEventListener("DOMContentLoaded", function () {
+            var originSelect = document.getElementById("origin");
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "http://localhost:8080/api/departures", true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    var destinations = JSON.parse(xhr.responseText);
+
+                    originSelect.innerHTML = "";
+
+                    destinations.forEach(function (destination) {
+                        var option = document.createElement("option");
+                        option.text = destination;
+                        option.value = destination;
+                        originSelect.add(option);
+                    });
+                }
+            };
+            xhr.send();
+        });
+
+        let destinationCities = [];
+        // chamada à api para obter as cidades de chegada
+        document.addEventListener("DOMContentLoaded", function () {
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "http://localhost:8080/api/arrivals", true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    destinationCities = JSON.parse(xhr.responseText);
+                }
+                updateDestinationOptions()
+            };
+            xhr.send();
+        });
+
+        // não permitir que a partida e o destino sejam os mesmos
+        function updateDestinationOptions() {
+            var destinationSelect = document.getElementById('destination');
+            var prevValue = destinationSelect.value;
+            destinationSelect.innerHTML = "";
+            destinationCities.forEach(function (destination) {
+                if (destination !== document.getElementById('origin').value) {
+                    var option = document.createElement("option");
+                    option.text = destination;
+                    option.value = destination;
+                    destinationSelect.add(option);
+                }
+            });
+        }
+
+
         // search Trips
         function searchTrip() {
             const origin = document.getElementById('origin').value;
@@ -86,29 +137,6 @@
         document.getElementById('date').min = formattedDate;
 
 
-        // não permitir que a partida e o destino sejam os mesmos
-        function updateDestinationOptions() {
-            var originSelect = document.getElementById('origin');
-            var destinationSelect = document.getElementById('destination');
-            var initialDestinationValue = destinationSelect.value;
-            destinationSelect.innerHTML = '';
-            var foundSelectedValue = false;
-            for (var i = 0; i < originSelect.options.length; i++) {
-                if (!originSelect.options[i].selected) {
-                    var option = document.createElement('option');
-                    option.value = originSelect.options[i].value;
-                    option.textContent = originSelect.options[i].textContent;
-                    destinationSelect.appendChild(option);
-                    if (option.value === initialDestinationValue) {
-                        foundSelectedValue = true;
-                    }
-                }
-            }
-            if (foundSelectedValue) {
-                destinationSelect.value = initialDestinationValue;
-            }
-        }
-        updateDestinationOptions();
 
     </script>
 
