@@ -1,5 +1,7 @@
 package tqs.ua.pt.backend.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +24,10 @@ public class ReservationService {
             throw new IllegalArgumentException("Not enough seats available");
         }
         return reservationRepository.save(reservation);
+    }
+
+    public List<Reservation> getAllReservations() {
+        return reservationRepository.findAll();
     }
 
     public Reservation getReservationByToken(Long token) {

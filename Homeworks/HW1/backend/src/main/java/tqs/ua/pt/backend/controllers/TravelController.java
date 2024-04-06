@@ -9,6 +9,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,6 +32,11 @@ public class TravelController {
         return new ResponseEntity<Travel>(travelService.save(travel), HttpStatus.CREATED);
     }
 
+    @GetMapping("/travel")
+    public List<Travel> getAllTravels() {
+        return travelService.getAllTravels();
+    }
+
     @GetMapping("/travel/{id}")
     public Travel getTravelById(@PathVariable("id") Long travelId) {
         return travelService.getTravelById(travelId);
@@ -49,8 +55,6 @@ public class TravelController {
 
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date startDate = formatter.parse(date);
-        System.out.println("esta é a data que recebe: ");
-        System.out.println(startDate);
 
         Calendar calendar = Calendar.getInstance();
         startDate.setYear(startDate.getYear() + 1900); // uma vez que no Date(), o ano começa em 1900

@@ -1,5 +1,7 @@
 package tqs.ua.pt.backend.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +25,11 @@ public class ReservationController {
     @PostMapping("/reservation")
     public ResponseEntity<Reservation> saveReservation(@RequestBody Reservation reservation) {
         return new ResponseEntity<Reservation>(reservationService.save(reservation), HttpStatus.CREATED);
+    }
+
+    @GetMapping("/reservation")
+    public List<Reservation> getAllReservations() {
+        return reservationService.getAllReservations();
     }
 
     @GetMapping("/reservation/{token}")
