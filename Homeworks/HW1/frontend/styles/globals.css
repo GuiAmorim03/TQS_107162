@@ -86,6 +86,17 @@
     font-size: 15px;
 }
 
+
+.reservation {
+    background-color: white;
+    border-radius: 25px;
+    margin: 2.5rem;
+    padding: 2.5rem;
+    padding-bottom: 0.5rem;
+    border: 3px solid #1d1d1d;
+}
+
+
 .col-3 select,
 .col-4 select {
     width: 150px;

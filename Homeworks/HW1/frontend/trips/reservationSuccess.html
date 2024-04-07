@@ -27,7 +27,34 @@
                 <h3>Thank you!</h3>
                 <h5>Your reservation has been confirmed</h5>
             </div>
-            <div class="col-12 text-center mt-3">
+            <div id="reservationContainer">
+                <div class="row reservation">
+                    <div class="row">
+                        <div class="col-6">
+                            <h3>Name</h3>
+                            <p id="name"></p>
+                        </div>
+                        <div class="col-6">
+                            <h3>Email</h3>
+                            <p id="email"></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <h3>Phone Number</h3>
+                            <p id="phone"></p>
+                        </div>
+                        <div class="col-6">
+                            <h3>Payment Method</h3>
+                            <p id="paymentMethod"></p>
+                        </div>
+                    </div>
+                    <div class="row text-center mt-3">
+                        <h1><span id="qtt"></span>x ticket</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 text-center mt-3 ">
                 <a href="../index.html" type="submit" class="btn btn-dark">Homepage</a href="../index.html">
             </div>
         </div>
@@ -44,6 +71,25 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
+
+    <script>
+        var reservationID = new URL(window.location).href.split('?')[1];
+        var reservation;
+
+        fetch(`http://localhost:8080/api/reservation/${reservationID}`)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                reservation = data;
+
+                document.getElementById('name').textContent = reservation.name;
+                document.getElementById('email').textContent = reservation.email;
+                document.getElementById('phone').textContent = reservation.phone;
+                document.getElementById('paymentMethod').textContent = reservation.paymentMethod;
+                document.getElementById('qtt').textContent = reservation.qtt;
+            });
+
+    </script>
 
 
 
