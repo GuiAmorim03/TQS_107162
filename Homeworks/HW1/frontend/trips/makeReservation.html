@@ -49,20 +49,20 @@
                     <textarea class="form-control" id="address" rows="3" required></textarea>
                 </div>
                 <div class="col-6 mb-3">
-                    <label for="payment" class="form-label">Payment Method:</label>
-                    <select class="form-select" id="payment" required>
+                    <label for="paymentMethod" class="form-label">Payment Method:</label>
+                    <select class="form-select" id="paymentMethod" required>
                         <option value="mb_way">MB Way</option>
                         <option value="bank_card">Bank Card</option>
                         <option value="paypal">PayPal</option>
                     </select>
                 </div>
                 <div class="col-6 mb-3">
-                    <label for="card_number" class="form-label">Card Number:</label>
-                    <input type="text" class="form-control" id="card_number">
+                    <label for="paymentNumber" class="form-label">Payment Number:</label>
+                    <input type="text" class="form-control" id="paymentNumber">
                 </div>
                 <div class="col-12 mb-3 text-end">
-                    <label for="numTickets" class="form-label" style="margin: 0;">Qtt </label>
-                    <select style="width: 50px; border: 0; border-radius: 5px;" id="numTickets" required>
+                    <label for="qtt" class="form-label" style="margin: 0;">Qtt </label>
+                    <select style="width: 50px; border: 0; border-radius: 5px;" id="qtt" required>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -96,27 +96,76 @@
         crossorigin="anonymous"></script>
 
     <script>
+
+        var travelToBookID = new URL(window.location).href.split('?')[1];
+        let travelToBook;
+        fetch(`http://localhost:8080/api/travel/${travelToBookID}`)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                travelToBook = data;
+            });
+
+
+
         function makeReservation() {
+            let token;
             const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
             const phone = document.getElementById('phone').value;
             const nif = document.getElementById('nif').value;
             const address = document.getElementById('address').value;
-            const payment = document.getElementById('payment').value;
-            const card_number = document.getElementById('card_number').value;
-            const numTickets = document.getElementById('numTickets').value;
+            const paymentMethod = document.getElementById('paymentMethod').value;
+            const paymentNumber = document.getElementById('paymentNumber').value;
+            const qtt = document.getElementById('qtt').value;
 
             console.log('Name: ' + name);
             console.log('Email: ' + email);
             console.log('Phone: ' + phone);
             console.log('NIF: ' + nif);
             console.log('Address: ' + address);
-            console.log('Payment: ' + payment);
-            console.log('Card Number: ' + card_number);
-            console.log('Number of Tickets: ' + numTickets);
+            console.log('Payment Method: ' + paymentMethod);
+            console.log('Payment Number: ' + paymentNumber);
+            console.log('Number of Tickets: ' + qtt);
+
+            try {
+                fetch('http://localhost:8080/api/reservation', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        travel: {
+                            travelId: travelToBookID,
+                            departure: travelToBook.departure,
+                            arrival: travelToBook.arrival,
+                            dateDeparture: travelToBook.dateDeparture,
+                            dateArrival: travelToBook.dateArrival,
+                            travelDuration: travelToBook.travelDuration,
+                            seats: travelToBook.seats,
+                            price: travelToBook.price
+                        },
+                        name: name,
+                        email: email,
+                        phone: phone,
+                        nif: nif,
+                        address: address,
+                        paymentMethod: paymentMethod,
+                        paymentNumber: paymentNumber,
+                        qtt: qtt,
+                    })
+                })
+                    .then(response => response.json()) // Extrair JSON da resposta
+                    .then(data => {
+                        token = data.token;
+                    });
+            } catch (error) {
+                console.error('Error:', error);
+            }
+
 
             setTimeout(() => {
-                window.location.href = 'reservationSuccess.html';
+                window.location.href = 'reservationSuccess.html?'+token;
             }, 1000);
         }
     </script>

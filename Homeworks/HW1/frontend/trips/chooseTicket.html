@@ -25,7 +25,7 @@
         <div class="row choose-ticket-section-body p-3">
             <div class="row choose-ticket-section-description">
                 <h3>Search for Bus Tickets</h3>
-                <h5>From Lisbon to Madrid on <span id="currentDate"></span></h5>
+                <h5>From <span id="from"></span> to <span id="to"></span> <span id="currentDate"></span></h5>
             </div>
 
             <div id="ticketsContainer">
@@ -47,7 +47,30 @@
 
 
         <script>
+
+            var url = new URL(window.location).href.split('?')[1];
+            // subtituir & por /
+            var countUrlParams = url.split('&').length;
+            url = url.replace(/&/g, '/');
+            var tickets = [];
+            fetch(`http://localhost:8080/api/travel/${url}`)
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    tickets = data;
+                    generateTickets();
+
+                    document.getElementById('from').textContent = tickets[0].departure;
+                    document.getElementById('to').textContent = tickets[0].arrival;
+
+                    if (countUrlParams == 3) {
+                        document.getElementById('currentDate').textContent = " on " + formatTravelDayHeader(new Date(tickets[0].dateDeparture));
+                    }
+                });
+
+
             // Dados dos bilhetes
+            /*
             var tickets = [
                 {
                     trip: 100,
@@ -80,9 +103,11 @@
                     seats: 30
                 }
             ];
+            */
 
             // Função para gerar bilhetes dinamicamente na página
             function generateTickets() {
+                console.log('Generating tickets');
                 var ticketsContainer = document.getElementById("ticketsContainer");
                 tickets.forEach(function (ticket, index) {
                     var ticketAvailable = ticket.seats === 0 ? "btn-secondary disabled" : "btn-primary";
@@ -91,29 +116,34 @@
                     ticketDiv.classList.add("row", "ticket");
                     ticketDiv.innerHTML = `
                             <div class="col-9">
+                                <div class="row ticket-day">
+                                    <div class="col-4 text-end">
+                                        ${formatTravelDay(new Date(ticket.dateDeparture))}
+                                    </div>
+                                </div>
                                 <div class="row ticket-schedule">
                                     <div class="col-4 text-end">
-                                        ${ticket.departTime} 
+                                        ${formatTravelTime(new Date(ticket.dateDeparture))} 
                                     </div>
                                     <div class="col-4">
                                         <div class="divider-custom">
                                             <div class="divider-custom-line"></div>
-                                            ${ticket.duration}
+                                            ${formatTravelDuration(ticket.travelDuration)}
                                             <div class="divider-custom-line"></div>
                                         </div>
                                     </div>
                                     <div class="col-4">
-                                        ${ticket.arriveTime}
+                                        ${formatTravelTime(new Date(ticket.dateArrival))} 
                                     </div>
                                 </div>
                                 <div class="row ticket-locals">
                                     <div class="col-4 text-end">
-                                        ${ticket.from} 
+                                        ${ticket.departure} 
                                     </div>
                                     <div class="col-4">
                                     </div>
                                     <div class="col-4">
-                                        ${ticket.to}
+                                        ${ticket.arrival}
                                     </div>
                                 </div>
                             </div>
@@ -121,32 +151,51 @@
                                 <p class="ticket-price">
                                     ${ticket.price}
                                 </p>
-                                <button type="button" id="${ticket.trip}" class="btn ${ticketAvailable}" onclick="chooseTickets()">Buy Ticket</button>
+                                <button type="button" id="${ticket.travelId}" class="btn ${ticketAvailable}" onclick="chooseTickets()">Buy Ticket</button>
                             </div>
                         `;
                     ticketsContainer.appendChild(ticketDiv);
                 });
             }
 
-            // Chamar a função para gerar bilhetes
-            generateTickets();
 
-            // dia de hoje
-            var today = new Date();
-            var options = { year: 'numeric', month: 'long', day: 'numeric' };
-            document.getElementById('currentDate').textContent = today.toLocaleDateString('en-US', options);
+
+            function formatTravelDayHeader(date) {
+                newData = new Date(date);
+                newData.setYear(newData.getFullYear() - 1900);
+
+                options = { year: 'numeric', month: 'long', day: 'numeric' };
+                return newData.toLocaleDateString('en-US', options);
+            }
+
+            function formatTravelDay(date) {
+                newData = new Date(date);
+                newData.setYear(newData.getFullYear() - 1900);
+
+                return newData.getDate() + "/" + (newData.getMonth() + 1) + "/" + newData.getFullYear();
+            }
+
+            function formatTravelTime(date) {
+                const hours = date.getHours().toString().padStart(2, '0');
+                const minutes = date.getMinutes().toString().padStart(2, '0');
+                return `${hours}:${minutes}`;
+            }
+
+            function formatTravelDuration(duration) {
+                const hours = Math.floor(duration / 60);
+                const minutes = duration % 60;
+                return `${hours}h${minutes}`;
+            }
 
 
 
             // choose Tickets
             function chooseTickets() {
 
-                console.log('Choosing ticket ' + event.target.id);
+                url = event.target.id;
+                console.log('Choosing ticket ' + url);
 
-                
-                setTimeout(() => {
-                    window.location.href = 'makeReservation.html';
-                }, 1000);
+                window.location.href = 'makeReservation.html?' + url;
             }
 
         </script>
