@@ -126,8 +126,14 @@
             console.log('Searching for trips from ' + origin + ' to ' + destination);
             console.log('Date: ' + ((date === '') ? 'soon' : date))
 
+            url = origin + '&' + destination
+            if (date !== '') {
+                url += '&' + date
+            }
+
+
             setTimeout(() => {
-                window.location.href = 'trips/chooseTicket.html';
+                window.location.href = 'trips/chooseTicket.html?' + url;
             }, 1000);
         }
 
