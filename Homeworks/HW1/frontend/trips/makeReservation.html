@@ -85,9 +85,9 @@
 
 
     <!-- Footer -->
-    <div class="footer fixed-bottom bg-dark text-white text-center">
+    <!-- <div class="footer fixed-bottom bg-dark text-white text-center">
         © 2024 Guilherme Amorim
-    </div>
+    </div> -->
     <!-- Footer -->
 
 
@@ -170,14 +170,13 @@
                     .then(data => {
                         token = data.token;
                     });
+                    window.location.href = 'reservationSuccess.html?' + token;
+
             } catch (error) {
                 console.error('Error:', error);
             }
 
 
-            setTimeout(() => {
-                window.location.href = 'reservationSuccess.html?'+token;
-            }, 1000);
         }
     </script>
 </body>

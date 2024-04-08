@@ -16,6 +16,8 @@
 	<description>backend for bus reservation</description>
 	<properties>
 		<java.version>17</java.version>
+		<selenium-java.version>4.18.1</selenium-java.version>
+		<selenium-jupiter.version>5.0.1</selenium-jupiter.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -41,6 +43,24 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-java</artifactId>
+			<version>${selenium-java.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.github.bonigarcia</groupId>
+			<artifactId>selenium-jupiter</artifactId>
+			<version>${selenium-jupiter.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.assertj</groupId>
+			<artifactId>assertj-core</artifactId>
+			<version>3.24.2</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
