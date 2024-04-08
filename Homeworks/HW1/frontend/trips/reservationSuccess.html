@@ -51,6 +51,7 @@
                     </div>
                     <div class="row text-center mt-3">
                         <h1><span id="qtt"></span>x ticket</h1>
+                        <h5>[<span id="valuePaid"></span>]</h5>
                     </div>
                 </div>
             </div>
@@ -87,6 +88,22 @@
                 document.getElementById('phone').textContent = reservation.phone;
                 document.getElementById('paymentMethod').textContent = reservation.paymentMethod;
                 document.getElementById('qtt').textContent = reservation.qtt;
+
+                let exchangeRate;
+                fetch('https://open.er-api.com/v6/latest/EUR')
+                    .then(response => response.json())
+                    .then(data => {
+                        exchangeRate= data.rates[reservation.currency];
+                        let currencySymbol = '€';
+                        if (reservation.currency === 'USD') {
+                            currencySymbol = '$';
+                        } else if (reservation.currency === 'GBP') {
+                            currencySymbol = '£';
+                        }
+                        document.getElementById('valuePaid').textContent = `${(reservation.travel.price * reservation.qtt * exchangeRate).toFixed(2)} ${currencySymbol}`;
+                    });
+
+
             });
 
     </script>

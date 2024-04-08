@@ -22,9 +22,10 @@ public class Reservation {
     private String paymentMethod;
     private String paymentNumber;
     private int qtt;
+    private String currency;
 
     public Reservation(Travel travel, String name, String email, String phone, String nif, String address,
-            String paymentMethod, String paymentNumber, int qtt) {
+            String paymentMethod, String paymentNumber, int qtt, String currency) {
         this.travel = travel;
         this.name = name;
         this.email = email;
@@ -34,6 +35,7 @@ public class Reservation {
         this.paymentMethod = paymentMethod;
         this.paymentNumber = paymentNumber;
         this.qtt = qtt;
+        this.currency = currency;
     }
 
     public Reservation() {
@@ -122,6 +124,14 @@ public class Reservation {
         this.qtt = qtt;
     }
 
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
+
     @Override
     public String toString() {
         return "Reservation{" +
@@ -135,6 +145,7 @@ public class Reservation {
                 ", paymentMethod='" + paymentMethod + '\'' +
                 ", paymentNumber='" + paymentNumber + '\'' +
                 ", qtt=" + qtt +
+                ", currency='" + currency + '\'' +
                 '}';
     }
 }

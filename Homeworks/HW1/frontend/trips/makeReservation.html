@@ -119,6 +119,15 @@
             const paymentNumber = document.getElementById('paymentNumber').value;
             const qtt = document.getElementById('qtt').value;
 
+            console.log(localStorage.getItem('currency'));
+            let currency = "EUR"
+            if (localStorage.getItem('currency') === 'USD') {
+                currency = "USD"
+            } else if (localStorage.getItem('currency') === 'GBP') {
+                currency = "GBP"
+            }
+
+
             console.log('Name: ' + name);
             console.log('Email: ' + email);
             console.log('Phone: ' + phone);
@@ -127,6 +136,7 @@
             console.log('Payment Method: ' + paymentMethod);
             console.log('Payment Number: ' + paymentNumber);
             console.log('Number of Tickets: ' + qtt);
+            console.log('Currency: ' + currency);
 
             try {
                 fetch('http://localhost:8080/api/reservation', {
@@ -153,6 +163,7 @@
                         paymentMethod: paymentMethod,
                         paymentNumber: paymentNumber,
                         qtt: qtt,
+                        currency: currency
                     })
                 })
                     .then(response => response.json()) // Extrair JSON da resposta

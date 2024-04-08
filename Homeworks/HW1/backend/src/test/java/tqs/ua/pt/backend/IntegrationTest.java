@@ -66,7 +66,7 @@ public class IntegrationTest {
     @Test
     void whenValidInput_thenCreateReservation() {
         travelRepository.save(travel); // é necessário guardar a viagem antes de criar a reserva
-        Reservation reservation = new Reservation(travel, "Joao", "j@a.pt", "123456789", "123456789", "Rua", "MB WAY", "123456789", 2);
+        Reservation reservation = new Reservation(travel, "Joao", "j@a.pt", "123456789", "123456789", "Rua", "MB WAY", "123456789", 2, "EUR");
      
         restTemplate.postForEntity("/api/reservation", reservation, Reservation.class);
 

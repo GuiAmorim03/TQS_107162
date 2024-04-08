@@ -34,7 +34,7 @@ public class ReservationRepositoryTest {
         travel = new Travel("Lisbon", "Madrid", new Date(2024, 4, 3, 10, 30), 420, 30);
         entityManager.persistAndFlush(travel);
 
-        reservation = new Reservation(travel, "Cliente Aleatório", "client@a.pt", "987654321", "123456789", "Rua dos Testes, Aveiro, nº3", "MB Way", "987654321", 3);
+        reservation = new Reservation(travel, "Cliente Aleatório", "client@a.pt", "987654321", "123456789", "Rua dos Testes, Aveiro, nº3", "MB Way", "987654321", 3, "EUR");
         entityManager.persistAndFlush(reservation);
     }
 
