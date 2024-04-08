@@ -23,3 +23,21 @@ De seguida, inicia-se o backend, no diretório `\backend` com o comando:
 mvn spring-boot:run
 ```
 
+## SonarQube
+
+### Prepare a local instance of SonarQube
+```bash
+docker run -d --name sonarqube -e SONAR_ES_BOOTSTRAP_CHECKS_DISABLE=true -p 9000:9000 sonarqube:latest
+```
+
+O Sonar está disponível em [http://localhost:9000](http://localhost:9000)
+As credenciais default são: admin/admin
+
+### Criar o projeto no SonarQube
+
+Primeiramente, é necessário adicionar as dependências do Jacoco ao `pom.xml` do backend:
+
+De seguida, no repositório `\backend`, correr o seguinte comando:
+```bash
+mvn verify sonar:sonar -Dsonar.host.url=http://localhost:9000 -Dsonar.projectKey=homework-tqs -Dsonar.login=admin -Dsonar.password=tqsHW
+```
