@@ -189,4 +189,41 @@ class TravelControllerTest {
                                 .andExpect(jsonPath("$[2]", is("Paris")));
         }
 
+        @Test
+        void whenGetAllTravels_thenReturnAllTravels() throws Exception {
+                when(travelService.getAllTravels()).thenReturn(List.of(travel, anotherTravel, anotherTravelanotherDay));
+
+                String formattedDepartureDate0 = dateFormat.format(new Date(2024, 4, 8, 11, 30, 0));
+                String formattedDepartureDate1 = dateFormat.format(new Date(2024, 4, 8, 15, 30, 0));
+                String formattedDepartureDate2 = dateFormat.format(new Date(2024, 4, 9, 11, 30, 0));
+                String formattedArrivalDate0 = dateFormat.format(new Date(2024, 4, 8, 15, 0, 0));
+                String formattedArrivalDate1 = dateFormat.format(new Date(2024, 4, 8, 19, 30, 0));
+                String formattedArrivalDate2 = dateFormat.format(new Date(2024, 4, 9, 15, 0, 0));
+
+                formattedDepartureDate0 = formattedDepartureDate0.replaceAll("Z$", "+00:00");
+                formattedDepartureDate1 = formattedDepartureDate1.replaceAll("Z$", "+00:00");
+                formattedDepartureDate2 = formattedDepartureDate2.replaceAll("Z$", "+00:00");
+                formattedArrivalDate0 = formattedArrivalDate0.replaceAll("Z$", "+00:00");
+                formattedArrivalDate1 = formattedArrivalDate1.replaceAll("Z$", "+00:00");
+                formattedArrivalDate2 = formattedArrivalDate2.replaceAll("Z$", "+00:00");
+
+                mvc.perform(get("/api/travel").contentType(MediaType.APPLICATION_JSON))
+                                .andExpect(status().isOk())
+                                .andExpect(jsonPath("$", hasSize(3)))
+                                .andExpect(jsonPath("$[0].departure", is("Lisbon")))
+                                .andExpect(jsonPath("$[0].arrival", is("Porto")))
+                                .andExpect(jsonPath("$[0].dateDeparture", is(formattedDepartureDate0)))
+                                .andExpect(jsonPath("$[0].dateArrival", is(formattedArrivalDate0)))
+                                .andExpect(jsonPath("$[0].price", is(12.5)))
+                                .andExpect(jsonPath("$[1].departure", is("Lisbon")))
+                                .andExpect(jsonPath("$[1].arrival", is("Porto")))
+                                .andExpect(jsonPath("$[1].dateDeparture", is(formattedDepartureDate1)))
+                                .andExpect(jsonPath("$[1].dateArrival", is(formattedArrivalDate1)))
+                                .andExpect(jsonPath("$[1].price", is(12.5)))
+                                .andExpect(jsonPath("$[2].departure", is("Lisbon")))
+                                .andExpect(jsonPath("$[2].arrival", is("Porto")))
+                                .andExpect(jsonPath("$[2].dateDeparture", is(formattedDepartureDate2)))
+                                .andExpect(jsonPath("$[2].dateArrival", is(formattedArrivalDate2)))
+                                .andExpect(jsonPath("$[2].price", is(12.5)));
+        }
 }

@@ -51,4 +51,12 @@ class ReservationRepositoryTest {
         Reservation found = reservationRepository.findByToken(-99L);
         assertThat(found).isNull();
     }
+
+    @Test
+    // return all Reservations
+    void findAll() {
+        Reservation another = new Reservation(travel, "Cliente Aleatório", "client@a.pt", "987654321", "123456789", "Rua dos Testes, Aveiro, nº3", "MB Way", "987654321", 1, "EUR");
+        entityManager.persistAndFlush(another);
+        assertThat(reservationRepository.findAll()).hasSize(2).contains(reservation, another);
+    }
 }

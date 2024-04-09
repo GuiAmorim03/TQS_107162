@@ -85,4 +85,35 @@ class ReservationControllerTest {
                 .andExpect(jsonPath("$.paymentNumber", is("987654321")))
                 .andExpect(jsonPath("$.qtt", is(3)));
     }
+
+    @Test
+    void whenGetAllReservations_thenReturnAllReservations() throws Exception {
+        Reservation anotherReservation = new Reservation(travel, "John Snow", "js@mail.com", "987654321", "123456789",
+                "Rua dos Testes, Aveiro, nº3", "MB Way", "987654321", 4, "EUR");
+
+        when(reservationService.getAllReservations()).thenReturn(java.util.List.of(reservation, anotherReservation));
+
+        mvc.perform(get("/api/reservation").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].travel.departure", is("Lisbon")))
+                .andExpect(jsonPath("$[0].travel.arrival", is("Madrid")))
+                .andExpect(jsonPath("$[0].travel.price", is(30.0)))
+                .andExpect(jsonPath("$[0].travel.seats", is(25)))
+                .andExpect(jsonPath("$[0].name", is("Cliente Aleatório")))
+                .andExpect(jsonPath("$[0].email", is("client@a.pt")))
+                .andExpect(jsonPath("$[0].phone", is("987654321")))
+                .andExpect(jsonPath("$[0].nif", is("123456789")))
+                .andExpect(jsonPath("$[0].address", is("Rua dos Testes, Aveiro, nº3")))
+                .andExpect(jsonPath("$[0].paymentMethod", is("MB Way")))
+                .andExpect(jsonPath("$[0].paymentNumber", is("987654321")))
+                .andExpect(jsonPath("$[0].qtt", is(3)))
+                .andExpect(jsonPath("$[1].name", is("John Snow")))
+                .andExpect(jsonPath("$[1].email", is("js@mail.com")))
+                .andExpect(jsonPath("$[1].phone", is("987654321")))
+                .andExpect(jsonPath("$[1].nif", is("123456789")))
+                .andExpect(jsonPath("$[1].address", is("Rua dos Testes, Aveiro, nº3")))
+                .andExpect(jsonPath("$[1].paymentMethod", is("MB Way")))
+                .andExpect(jsonPath("$[1].paymentNumber", is("987654321")))
+                .andExpect(jsonPath("$[1].qtt", is(4)));
+    }
 }
