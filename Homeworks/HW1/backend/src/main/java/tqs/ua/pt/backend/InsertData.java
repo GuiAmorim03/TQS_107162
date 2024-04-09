@@ -18,6 +18,10 @@ public class InsertData implements CommandLineRunner {
 
     private static final Logger logger = LoggerFactory.getLogger(InsertData.class);
 
+    private static final String LISBON = "Lisbon";
+    private static final String MADRID = "Madrid";
+    private static final String PARIS = "Paris";
+
     private TravelRepository travelRepository;
     private ReservationRepository reservationRepository;
 
@@ -35,32 +39,32 @@ public class InsertData implements CommandLineRunner {
         reservationRepository.deleteAll();
         travelRepository.deleteAll();
 
-        travelRepository.save(new Travel("Lisbon", "Madrid", new Date(2024, 3, 13, 11, 30), 400, 30));
-        travelRepository.save(new Travel("Lisbon", "Madrid", new Date(2024, 3, 13, 18, 30), 400, 30));
-        travelRepository.save(new Travel("Madrid", "Lisbon", new Date(2024, 3, 13, 11, 30), 400, 30));
-        travelRepository.save(new Travel("Madrid", "Lisbon", new Date(2024, 3, 13, 18, 30), 400, 30));
-        travelRepository.save(new Travel("Lisbon", "Madrid", new Date(2024, 3, 14, 11, 30), 400, 30));
-        travelRepository.save(new Travel("Lisbon", "Madrid", new Date(2024, 3, 14, 18, 30), 400, 30));
-        travelRepository.save(new Travel("Madrid", "Lisbon", new Date(2024, 3, 14, 11, 30), 400, 30));
-        travelRepository.save(new Travel("Madrid", "Lisbon", new Date(2024, 3, 14, 18, 30), 400, 30));
+        travelRepository.save(new Travel(LISBON, MADRID, new Date(2024, 3, 13, 11, 30), 400, 30));
+        travelRepository.save(new Travel(LISBON, MADRID, new Date(2024, 3, 13, 18, 30), 400, 30));
+        travelRepository.save(new Travel(MADRID, LISBON, new Date(2024, 3, 13, 11, 30), 400, 30));
+        travelRepository.save(new Travel(MADRID, LISBON, new Date(2024, 3, 13, 18, 30), 400, 30));
+        travelRepository.save(new Travel(LISBON, MADRID, new Date(2024, 3, 14, 11, 30), 400, 30));
+        travelRepository.save(new Travel(LISBON, MADRID, new Date(2024, 3, 14, 18, 30), 400, 30));
+        travelRepository.save(new Travel(MADRID, LISBON, new Date(2024, 3, 14, 11, 30), 400, 30));
+        travelRepository.save(new Travel(MADRID, LISBON, new Date(2024, 3, 14, 18, 30), 400, 30));
         
-        travelRepository.save(new Travel("Lisbon", "Paris", new Date(2024, 3, 13, 11, 30), 990, 20));
-        travelRepository.save(new Travel("Lisbon", "Paris", new Date(2024, 3, 13, 18, 30), 990, 20));
-        travelRepository.save(new Travel("Paris", "Lisbon", new Date(2024, 3, 13, 11, 30), 990, 20));
-        travelRepository.save(new Travel("Paris", "Lisbon", new Date(2024, 3, 13, 18, 30), 990, 20));
-        travelRepository.save(new Travel("Lisbon", "Paris", new Date(2024, 3, 14, 11, 30), 990, 20));
-        travelRepository.save(new Travel("Lisbon", "Paris", new Date(2024, 3, 14, 18, 30), 990, 20));
-        travelRepository.save(new Travel("Paris", "Lisbon", new Date(2024, 3, 14, 11, 30), 990, 20));
-        travelRepository.save(new Travel("Paris", "Lisbon", new Date(2024, 3, 14, 18, 30), 990, 20));
+        travelRepository.save(new Travel(LISBON, PARIS, new Date(2024, 3, 13, 11, 30), 990, 20));
+        travelRepository.save(new Travel(LISBON, PARIS, new Date(2024, 3, 13, 18, 30), 990, 20));
+        travelRepository.save(new Travel(PARIS, LISBON, new Date(2024, 3, 13, 11, 30), 990, 20));
+        travelRepository.save(new Travel(PARIS, LISBON, new Date(2024, 3, 13, 18, 30), 990, 20));
+        travelRepository.save(new Travel(LISBON, PARIS, new Date(2024, 3, 14, 11, 30), 990, 20));
+        travelRepository.save(new Travel(LISBON, PARIS, new Date(2024, 3, 14, 18, 30), 990, 20));
+        travelRepository.save(new Travel(PARIS, LISBON, new Date(2024, 3, 14, 11, 30), 990, 20));
+        travelRepository.save(new Travel(PARIS, LISBON, new Date(2024, 3, 14, 18, 30), 990, 20));
 
-        travelRepository.save(new Travel("Madrid", "Paris", new Date(2024, 3, 13, 11, 30), 750, 25));
-        travelRepository.save(new Travel("Madrid", "Paris", new Date(2024, 3, 13, 18, 30), 750, 25));
-        travelRepository.save(new Travel("Paris", "Madrid", new Date(2024, 3, 13, 11, 30), 750, 25));
-        travelRepository.save(new Travel("Paris", "Madrid", new Date(2024, 3, 13, 18, 30), 750, 25));
-        travelRepository.save(new Travel("Madrid", "Paris", new Date(2024, 3, 14, 11, 30), 750, 25));
-        travelRepository.save(new Travel("Madrid", "Paris", new Date(2024, 3, 14, 18, 30), 750, 25));
-        travelRepository.save(new Travel("Paris", "Madrid", new Date(2024, 3, 14, 11, 30), 750, 25));
-        travelRepository.save(new Travel("Paris", "Madrid", new Date(2024, 3, 14, 18, 30), 750, 25));
+        travelRepository.save(new Travel(MADRID, PARIS, new Date(2024, 3, 13, 11, 30), 750, 25));
+        travelRepository.save(new Travel(MADRID, PARIS, new Date(2024, 3, 13, 18, 30), 750, 25));
+        travelRepository.save(new Travel(PARIS, MADRID, new Date(2024, 3, 13, 11, 30), 750, 25));
+        travelRepository.save(new Travel(PARIS, MADRID, new Date(2024, 3, 13, 18, 30), 750, 25));
+        travelRepository.save(new Travel(MADRID, PARIS, new Date(2024, 3, 14, 11, 30), 750, 25));
+        travelRepository.save(new Travel(MADRID, PARIS, new Date(2024, 3, 14, 18, 30), 750, 25));
+        travelRepository.save(new Travel(PARIS, MADRID, new Date(2024, 3, 14, 11, 30), 750, 25));
+        travelRepository.save(new Travel(PARIS, MADRID, new Date(2024, 3, 14, 18, 30), 750, 25));
 
         logger.info("Data inserted!");
     }
