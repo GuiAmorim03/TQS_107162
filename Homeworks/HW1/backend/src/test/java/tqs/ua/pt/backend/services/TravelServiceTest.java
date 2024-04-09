@@ -19,7 +19,7 @@ import tqs.ua.pt.backend.repositories.TravelRepository;
 
 @SuppressWarnings("deprecation")
 @ExtendWith(MockitoExtension.class)
-public class TravelServiceTest {
+class TravelServiceTest {
 
     @Mock(lenient = true)
     private TravelRepository travelRepository;
@@ -88,7 +88,7 @@ public class TravelServiceTest {
 
         List<Travel> travels = travelService.getTravelsByDepartureAndArrival("Lisbon", "Porto");
 
-        assertThat(travels.size()).isEqualTo(3);
+        assertThat(travels).hasSize(3);
         for (int i = 0; i < travels.size(); i++) {
             assertThat(travels.get(i).getDeparture()).isEqualTo("Lisbon");
             assertThat(travels.get(i).getArrival()).isEqualTo("Porto");
@@ -112,7 +112,7 @@ public class TravelServiceTest {
         List<Travel> travels = travelService.getTravelsByDepartureAndArrivalAndDate("Lisbon", "Porto",
                 new Date(2024, 4, 5), new Date(2024, 4, 6));
 
-        assertThat(travels.size()).isEqualTo(2);
+        assertThat(travels).hasSize(2);
         for (int i = 0; i < travels.size(); i++) {
             assertThat(travels.get(i).getDeparture()).isEqualTo("Lisbon");
             assertThat(travels.get(i).getArrival()).isEqualTo("Porto");
@@ -160,7 +160,8 @@ public class TravelServiceTest {
         assertThat(travels.get(5).getDateDeparture()).isEqualTo(new Date(2024, 4, 6, 14, 30));
         assertThat(travels.get(5).getDateArrival()).isEqualTo(new Date(2024, 4, 6, 18, 50));
 
-        // Refactor this method to reduce the number of assertions from 32 to less than 25
+        // Refactor this method to reduce the number of assertions from 32 to less than
+        // 25
         for (int i = 3; i <= 5; i++) {
             assertThat(travels.get(i).getDeparture()).isEqualTo("Lisbon");
             assertThat(travels.get(i).getArrival()).isEqualTo("Porto");
@@ -180,7 +181,7 @@ public class TravelServiceTest {
 
         List<String> departures = travelService.getAllDepartures();
 
-        assertThat(departures.size()).isEqualTo(3);
+        assertThat(departures).hasSize(3);
         assertThat(departures.get(0)).isEqualTo("Lisbon");
         assertThat(departures.get(1)).isEqualTo("Berlin");
         assertThat(departures.get(2)).isEqualTo("London");
@@ -194,7 +195,7 @@ public class TravelServiceTest {
 
         List<String> arrivals = travelService.getAllArrivals();
 
-        assertThat(arrivals.size()).isEqualTo(4);
+        assertThat(arrivals).hasSize(4);
         assertThat(arrivals.get(0)).isEqualTo("Madrid");
         assertThat(arrivals.get(1)).isEqualTo("Prague");
         assertThat(arrivals.get(2)).isEqualTo("Edinburgh");

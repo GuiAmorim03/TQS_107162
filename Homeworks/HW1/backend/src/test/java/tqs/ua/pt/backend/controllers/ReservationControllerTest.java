@@ -26,7 +26,7 @@ import tqs.ua.pt.backend.utils.JsonUtils;
 
 @SuppressWarnings("deprecation")
 @WebMvcTest(ReservationController.class)
-public class ReservationControllerTest {
+class ReservationControllerTest {
 
     @Autowired
     private MockMvc mvc;

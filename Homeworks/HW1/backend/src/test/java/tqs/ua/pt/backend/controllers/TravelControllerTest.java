@@ -29,7 +29,7 @@ import tqs.ua.pt.backend.utils.JsonUtils;
 
 @SuppressWarnings("deprecation")
 @WebMvcTest(TravelController.class)
-public class TravelControllerTest {
+class TravelControllerTest {
 
         @Autowired
         private MockMvc mvc;

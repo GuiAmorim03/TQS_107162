@@ -19,7 +19,7 @@ import tqs.ua.pt.backend.repositories.ReservationRepository;
 
 @SuppressWarnings("deprecation")
 @ExtendWith(MockitoExtension.class)
-public class ReservationServiceTest {
+class ReservationServiceTest {
 
     @Mock(lenient = true)
     private ReservationRepository reservationRepository;

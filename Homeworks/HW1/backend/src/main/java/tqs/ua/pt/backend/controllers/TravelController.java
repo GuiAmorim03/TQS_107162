@@ -32,7 +32,7 @@ public class TravelController {
 
     @PostMapping("/travel")
     public ResponseEntity<Travel> saveTravel(@RequestBody Travel travel) {
-        return new ResponseEntity<Travel>(travelService.save(travel), HttpStatus.CREATED);
+        return new ResponseEntity<>(travelService.save(travel), HttpStatus.CREATED);
     }
 
     @GetMapping("/travel")
@@ -46,8 +46,7 @@ public class TravelController {
     }
 
     @GetMapping("/travel/{departure}/{arrival}")
-    public List<Travel> getTravelByDepartureAndArrival(@PathVariable("departure") String departure, @PathVariable("arrival") String arrival) throws ParseException {
-
+    public List<Travel> getTravelByDepartureAndArrival(@PathVariable("departure") String departure, @PathVariable("arrival") String arrival) {
         return travelService.getTravelsByDepartureAndArrival(departure, arrival);
     }
 

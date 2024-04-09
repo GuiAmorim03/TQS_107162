@@ -21,14 +21,14 @@ public class Travel {
     private int seats;
     private double price;
 
-    private int MAX_SEATS = 25;
+    private int maxSEATS = 25;
 
     public Travel(String departure, String arrival, Date dateDeparture, int travelDuration, double price) {
         this.departure = departure;
         this.arrival = arrival;
         this.dateDeparture = dateDeparture;
         this.travelDuration = travelDuration;
-        this.seats = MAX_SEATS;
+        this.seats = maxSEATS;
         this.price = price;
 
         this.dateArrival = new Date(dateDeparture.getTime() + travelDuration * 60 * 1000); // vezes 60 segundos e 1000 milisegundos

@@ -14,7 +14,7 @@ import tqs.ua.pt.backend.models.Travel;
 
 @DataJpaTest
 @SuppressWarnings("deprecation")
-public class TravelRepositoryTest {
+class TravelRepositoryTest {
 
     @Autowired
     private TestEntityManager entityManager;

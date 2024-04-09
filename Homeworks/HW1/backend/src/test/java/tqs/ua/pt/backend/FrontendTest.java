@@ -21,7 +21,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 @ExtendWith(SeleniumJupiter.class)
-public class FrontendTest {
+class FrontendTest {
   private WebDriver driver;
   private Map<String, Object> vars;
   JavascriptExecutor js;
@@ -39,7 +39,7 @@ public class FrontendTest {
   }
 
   @Test
-  public void frontend() {
+  void frontend() {
     driver.get("http://localhost:8000/");
 
     // index.html

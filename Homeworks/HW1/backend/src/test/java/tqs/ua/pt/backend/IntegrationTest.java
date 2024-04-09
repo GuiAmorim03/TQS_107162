@@ -23,7 +23,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SuppressWarnings("deprecation")
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @TestPropertySource(locations = "application.properties")
-public class IntegrationTest {
+class IntegrationTest {
     
     @LocalServerPort
     int randomServerPort;
@@ -58,7 +58,7 @@ public class IntegrationTest {
 
 
         List<Travel> travels = travelRepository.findAll();
-        assertThat(travels.size()).isEqualTo(1);
+        assertThat(travels).hasSize(1);
         assertThat(travels).extracting(Travel::getDeparture).containsOnly(travel.getDeparture());
         assertThat(travels).extracting(Travel::getArrival).containsOnly(travel.getArrival());
     }
@@ -71,7 +71,7 @@ public class IntegrationTest {
         restTemplate.postForEntity("/api/reservation", reservation, Reservation.class);
 
         List<Reservation> reservations = reservationRepository.findAll();
-        assertThat(reservations.size()).isEqualTo(1);
+        assertThat(reservations).hasSize(1);
         assertThat(reservations).extracting(Reservation::getName).containsOnly(reservation.getName());
         assertThat(reservations).extracting(Reservation::getEmail).containsOnly(reservation.getEmail());   
     }
