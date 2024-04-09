@@ -67,7 +67,6 @@
                         exchangeRates.USD = data.rates.USD;
                         exchangeRates.GBP = data.rates.GBP;
                         exchangeRates.EUR = data.rates.EUR;
-                        console.log(exchangeRates);
                     });
 
                 var url = new URL(window.location).href.split('?')[1];
@@ -78,7 +77,6 @@
                 fetch(`http://localhost:8080/api/travel/${url}`)
                     .then(response => response.json())
                     .then(data => {
-                        console.log(data);
                         tickets = data;
                         generateTickets();
 
@@ -90,42 +88,6 @@
                         }
                     });
 
-
-                // Dados dos bilhetes
-                /*
-                var tickets = [
-                    {
-                        trip: 100,
-                        from: "Lisbon",
-                        to: "Madrid",
-                        duration: "6h",
-                        price: 20,
-                        departTime: "10:00",
-                        arriveTime: "16:00",
-                        seats: 11
-                    },
-                    {
-                        trip: 200,
-                        from: "Lisbon",
-                        to: "Madrid",
-                        duration: "6h30",
-                        price: 25,
-                        departTime: "14:00",
-                        arriveTime: "20:30",
-                        seats: 0
-                    },
-                    {
-                        trip: 300,
-                        from: "Lisbon",
-                        to: "Madrid",
-                        duration: "5h30",
-                        price: 30,
-                        departTime: "18:00",
-                        arriveTime: "23:30",
-                        seats: 30
-                    }
-                ];
-                */
 
                 // Função para gerar bilhetes dinamicamente na página
                 function generateTickets() {
@@ -212,7 +174,6 @@
 
                 function updatePriceExchange() {
                     const currency = document.querySelector('select').value;
-                    console.log('Currency: ' + currency);
                     localStorage.setItem('currency', currency);
                     tickets.forEach(function (ticket, index) {
                         const price = document.getElementById(`priceID=${ticket.travelId}`);

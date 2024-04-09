@@ -80,7 +80,6 @@
         fetch(`http://localhost:8080/api/reservation/${reservationID}`)
             .then(response => response.json())
             .then(data => {
-                console.log(data);
                 reservation = data;
 
                 document.getElementById('name').textContent = reservation.name;
