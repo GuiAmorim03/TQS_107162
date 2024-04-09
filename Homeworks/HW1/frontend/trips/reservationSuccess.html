@@ -83,8 +83,19 @@
                 reservation = data;
 
                 document.getElementById('name').textContent = reservation.name;
-                document.getElementById('email').textContent = reservation.email;
-                document.getElementById('phone').textContent = reservation.phone;
+
+                emailInitials = reservation.email.split('@')[0];
+                var firstChar = emailInitials.charAt(0);
+                var lastChar = emailInitials.charAt(emailInitials.length - 1);
+                var maskedChars = '*'.repeat(emailInitials.length - 2);
+                var maskedEmail = firstChar + maskedChars + lastChar;
+                document.getElementById('email').textContent = maskedEmail+ '@' + reservation.email.split('@')[1];
+
+                var phoneInitials = reservation.phone.charAt(0);
+                var phoneLastDigits = reservation.phone.substring(reservation.phone.length - 3);
+                var maskedPhone = phoneInitials + '*****' + phoneLastDigits;
+                document.getElementById('phone').textContent = maskedPhone;
+
                 document.getElementById('paymentMethod').textContent = reservation.paymentMethod;
                 document.getElementById('qtt').textContent = reservation.qtt;
 
@@ -92,7 +103,7 @@
                 fetch('https://open.er-api.com/v6/latest/EUR')
                     .then(response => response.json())
                     .then(data => {
-                        exchangeRate= data.rates[reservation.currency];
+                        exchangeRate = data.rates[reservation.currency];
                         let currencySymbol = '€';
                         if (reservation.currency === 'USD') {
                             currencySymbol = '$';
