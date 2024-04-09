@@ -41,3 +41,17 @@ De seguida, no repositório `\backend`, correr o seguinte comando:
 ```bash
 mvn verify sonar:sonar -Dsonar.host.url=http://localhost:9000 -Dsonar.projectKey=homework-tqs -Dsonar.login=admin -Dsonar.password=tqsHW
 ```
+
+## Documentação da API
+
+A documentação da API está disponível em [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
+
+Foi necessário adicionar a dependência do Swagger ao `pom.xml` do backend:
+
+```xml
+<dependency>
+    <groupId>org.springdoc</groupId>
+    <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+    <version>2.2.0</version>
+</dependency>
+```
