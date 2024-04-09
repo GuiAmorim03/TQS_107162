@@ -1,0 +1,29 @@
+<mxfile host="Electron" modified="2024-04-09T20:34:58.710Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/23.1.5 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="t87oMXY3ThExeiVGW7Bn" version="23.1.5" type="device">
+  <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
+    <mxGraphModel dx="1050" dy="629" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="WIyWlLk6GJQsqaUBKTNV-0" />
+        <mxCell id="WIyWlLk6GJQsqaUBKTNV-1" parent="WIyWlLk6GJQsqaUBKTNV-0" />
+        <mxCell id="-ml44grX_zueFNCGRoyN-1" value="Travel" style="swimlane;whiteSpace=wrap;html=1;rounded=0;shadow=0;strokeColor=default;strokeWidth=1;align=center;verticalAlign=middle;fontFamily=Tahoma;fontSize=14;fontColor=default;fontStyle=1;fillColor=default;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="280" y="210" width="200" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="-ml44grX_zueFNCGRoyN-3" value="&lt;div style=&quot;font-size: 13px;&quot;&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;travelId: Long&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 13px;&quot;&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;departure: String&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 13px;&quot;&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;arrival: String&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 13px;&quot;&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;dateDeparture: Date&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 13px;&quot;&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;dateArrival: Date&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 13px;&quot;&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;int travelDuration: int&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 13px;&quot;&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;int seats: int&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 13px;&quot;&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;price: Double&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontFamily=Tahoma;fontSize=13;fontColor=default;fontStyle=0;spacingTop=0;spacing=0;spacingBottom=4;spacingLeft=10;" vertex="1" parent="-ml44grX_zueFNCGRoyN-1">
+          <mxGeometry y="26" width="200" height="134" as="geometry" />
+        </mxCell>
+        <mxCell id="-ml44grX_zueFNCGRoyN-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=Helvetica;fontSize=12;fontColor=default;fontStyle=2;exitX=-0.026;exitY=0.167;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="-ml44grX_zueFNCGRoyN-5" target="-ml44grX_zueFNCGRoyN-1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="380" y="177" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="-ml44grX_zueFNCGRoyN-4" value="Reservation" style="swimlane;whiteSpace=wrap;html=1;rounded=0;shadow=0;strokeColor=default;strokeWidth=1;align=center;verticalAlign=middle;fontFamily=Tahoma;fontSize=14;fontColor=default;fontStyle=1;fillColor=default;startSize=23;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="540" y="120" width="200" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="-ml44grX_zueFNCGRoyN-5" value="&lt;div style=&quot;&quot;&gt;&lt;div style=&quot;&quot;&gt;token:&amp;nbsp;Long&lt;span style=&quot;background-color: initial;&quot;&gt;&amp;nbsp;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;travel:&amp;nbsp;&lt;span style=&quot;background-color: initial;&quot;&gt;Travel&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;name:&amp;nbsp;String&lt;/div&gt;&lt;div style=&quot;&quot;&gt;email:&amp;nbsp;String&lt;span style=&quot;background-color: initial;&quot;&gt;&amp;nbsp;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;phone:&amp;nbsp;String&lt;/div&gt;&lt;div style=&quot;&quot;&gt;nif:&amp;nbsp;String&lt;/div&gt;&lt;div style=&quot;&quot;&gt;address:&amp;nbsp;String&lt;/div&gt;&lt;div style=&quot;&quot;&gt;paymentMethod:&amp;nbsp;String&lt;/div&gt;&lt;div style=&quot;&quot;&gt;paymentNumber:&amp;nbsp;String&lt;/div&gt;&lt;div style=&quot;&quot;&gt;qtt: int&lt;/div&gt;&lt;div style=&quot;&quot;&gt;currency:&amp;nbsp;String&lt;/div&gt;&lt;div style=&quot;font-size: 13px;&quot;&gt;&lt;br&gt;&lt;/div&gt;&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontFamily=Tahoma;fontSize=13;fontColor=default;fontStyle=0;spacingTop=0;spacing=0;spacingBottom=4;spacingLeft=10;" vertex="1" parent="-ml44grX_zueFNCGRoyN-4">
+          <mxGeometry y="26" width="200" height="184" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
