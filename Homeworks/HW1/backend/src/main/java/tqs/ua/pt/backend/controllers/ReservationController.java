@@ -19,9 +19,13 @@ import tqs.ua.pt.backend.services.ReservationService;
 @RequestMapping("/api")
 public class ReservationController {
 
-    @Autowired
     private ReservationService reservationService;
 
+    @Autowired
+    public ReservationController(ReservationService reservationService) {
+        this.reservationService = reservationService;
+    }
+    
     @PostMapping("/reservation")
     public ResponseEntity<Reservation> saveReservation(@RequestBody Reservation reservation) {
         return new ResponseEntity<Reservation>(reservationService.save(reservation), HttpStatus.CREATED);

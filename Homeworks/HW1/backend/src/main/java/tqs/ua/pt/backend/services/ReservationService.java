@@ -12,9 +12,13 @@ import tqs.ua.pt.backend.repositories.ReservationRepository;
 @Service
 public class ReservationService {
     
-    @Autowired
     private ReservationRepository reservationRepository;
 
+    @Autowired
+    public ReservationService(ReservationRepository reservationRepository) {
+        this.reservationRepository = reservationRepository;
+    }
+    
     public Reservation save(Reservation reservation) {
         Travel travelToBuy = reservation.getTravel();
 

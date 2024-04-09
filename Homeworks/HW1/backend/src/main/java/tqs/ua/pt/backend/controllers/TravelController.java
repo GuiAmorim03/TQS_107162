@@ -23,8 +23,12 @@ import tqs.ua.pt.backend.services.TravelService;
 @RequestMapping("/api")
 public class TravelController {
 
-    @Autowired
     private TravelService travelService;
+
+    @Autowired
+    public TravelController(TravelService travelService) {
+        this.travelService = travelService;
+    }
 
     @PostMapping("/travel")
     public ResponseEntity<Travel> saveTravel(@RequestBody Travel travel) {

@@ -19,16 +19,4 @@ public interface TravelRepository extends JpaRepository<Travel, Long> {
     @Query("SELECT t FROM Travel t WHERE t.departure = :departure AND t.arrival = :arrival AND t.dateDeparture >= :startDate AND t.dateDeparture < :endDate")
     public List<Travel> findByDepartureAndArrivalAndDate(@Param("departure") String departure,
             @Param("arrival") String arrival, @Param("startDate") Date startDate, @Param("endDate") Date endDate);
-
-
-    /* Os métodos seguintes foram inicialmente criados, mas depois cheguei à conclusão que não seriam necessários 
-
-    public List<Travel> findByDeparture(String departure);
-
-    public List<Travel> findByArrival(String arrival);
-
-    @Query("SELECT t FROM Travel t WHERE t.date >= :startDate AND t.date < :endDate")
-    public List<Travel> findByDate(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
-             
-    */
 }

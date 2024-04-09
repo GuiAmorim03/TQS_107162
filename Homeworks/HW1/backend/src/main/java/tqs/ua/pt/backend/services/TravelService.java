@@ -13,9 +13,13 @@ import tqs.ua.pt.backend.repositories.TravelRepository;
 @Service
 public class TravelService {
 
-    @Autowired
     private TravelRepository travelRepository;
 
+    @Autowired
+    public TravelService(TravelRepository travelRepository) {
+        this.travelRepository = travelRepository;
+    }
+    
     public Travel save(Travel travel) {
         return travelRepository.save(travel);
     }

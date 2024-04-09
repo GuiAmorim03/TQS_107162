@@ -18,11 +18,14 @@ public class InsertData implements CommandLineRunner {
 
     private static final Logger logger = LoggerFactory.getLogger(InsertData.class);
 
-    @Autowired
     private TravelRepository travelRepository;
+    private ReservationRepository reservationRepository;
 
     @Autowired
-    private ReservationRepository reservationRepository;
+    public InsertData(TravelRepository travelRepository, ReservationRepository reservationRepository) {
+        this.travelRepository = travelRepository;
+        this.reservationRepository = reservationRepository;
+    }
 
     @Override
     public void run(String... args) throws Exception {
