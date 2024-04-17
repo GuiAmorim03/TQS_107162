@@ -5,7 +5,7 @@
 ## Lab 7.2
 
 ### Setup
-It was used the example from lab 3_2. In the `ControllerTest`, a test was added to test the integration with RestAssuredMockMvc.
+It was used the example from lab 3_2.
 
 ## Lab 7.3
 

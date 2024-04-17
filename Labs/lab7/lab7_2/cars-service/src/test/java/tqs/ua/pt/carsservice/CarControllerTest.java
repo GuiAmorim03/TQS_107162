@@ -9,7 +9,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.lang.annotation.Target;
 import java.util.Arrays;
 import java.util.List;
 
@@ -21,30 +20,25 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import io.restassured.module.mockmvc.RestAssuredMockMvc;
-
-
 @WebMvcTest(CarController.class)
 class CarControllerTest {
 
     @Autowired
-    private MockMvc mvc;
+    private MockMvc mvc;  
 
     @MockBean
     private CarManagerService service;
+
 
     @BeforeEach
     public void setUp() throws Exception {
     }
 
-    @Autowired
-    private MockMvc mockMvc;
-
     @Test
-    void whenPostCar_thenCreateCar() throws Exception {
+    void whenPostCar_thenCreateCar( ) throws Exception {
         Car bmw = new Car("bmw", "i8");
 
-        when(service.save(Mockito.any())).thenReturn(bmw);
+        when( service.save(Mockito.any()) ).thenReturn(bmw);
 
         mvc.perform(
                 post("/api/car").contentType(MediaType.APPLICATION_JSON).content(JsonUtils.toJson(bmw)))
@@ -55,6 +49,7 @@ class CarControllerTest {
 
     }
 
+   
     @Test
     void givenManyCars_whenGetCars_thenReturnJsonArray() throws Exception {
         Car bmw = new Car("bmw", "i8");
@@ -63,7 +58,7 @@ class CarControllerTest {
 
         List<Car> allCars = Arrays.asList(bmw, benz, audi);
 
-        when(service.getAllCars()).thenReturn(allCars);
+        when( service.getAllCars()).thenReturn(allCars);
 
         mvc.perform(
                 get("/api/cars").contentType(MediaType.APPLICATION_JSON))
@@ -76,12 +71,5 @@ class CarControllerTest {
         verify(service, times(1)).getAllCars();
     }
 
-    @Test
-    public void testRestAssuredMockMvc() {
-        RestAssuredMockMvc
-                .given()
-                .mockMvc(mockMvc)
-                .when().get("/api/cars");
-    }
 
 }
