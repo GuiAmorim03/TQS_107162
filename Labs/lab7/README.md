@@ -11,3 +11,9 @@ It was used the example from lab 3_2.
 
 ### Setup
 It was necessary to specify the version of the PostGres container
+
+## Lab 7.4
+
+### Setup
+It was used the example from lab 3_2.
+
